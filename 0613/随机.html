@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>随机</title>
+    <style>
+        p{
+            font-size: 300px;
+        }
+    </style>
+</head>
+<body>
+    <button>stop</button>
+    <button>start</button>
+    <p></p>
+    <script>
+        var btns = document.querySelectorAll('button');
+        var p = document.querySelector('p');
+        var arr = ['冉物格','白宝','魏恒','刘小远']
+        var n = 0;
+        var timer = null;
+        btns[1].onclick = function (){
+            clearInterval(timer);
+            timer = setInterval (function (){
+                p.innerText = arr[n];
+                n++;
+                if(n>arr.length-1){
+                    n=0;
+                }
+            },50)
+        }
+        var bl = false;
+        btns[0].onclick = function (){
+            clearInterval(timer);
+           timer = setInterval(function (){
+                if(bl){
+                    p.style.color = 'black';
+                    bl = false;
+                }else{
+                    p.style.color = 'gold';
+                    bl = true;
+                }
+            },100)
+        }
+    </script>
+</body>
+</html>
