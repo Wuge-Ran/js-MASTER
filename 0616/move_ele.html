@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>move_ele</title>
+    <link rel="stylesheet" href="css/global.css">
+    <script src="jquery-3.3.1.js"></script>
+    <style>
+        .box{
+            width: 441px;
+            height: 440px;
+            background: #3c278b;
+            margin: 10px auto;
+            display: flex;
+        }
+        .left,.middle,.right{
+            width: 160px;
+            height: 100%;
+        }
+        .middle{
+            width: 116px;
+            background: #4a34a2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .middle div{
+            width: 85px;
+            height: 30px;
+            margin: 10px 0;
+            line-height: 30px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+        }
+        .toLeft{
+            background: #01efd8;
+        }
+        .toRight{
+            background: #45a4fe;
+        }
+        ul li{
+            color: #fff;
+            line-height: 45px;
+            text-align: center;
+            cursor: pointer;
+            margin: 5px 0 ;
+        }
+        li:hover{
+            background: #31216e;
+        }
+        ul .active{
+            background: #31216e;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul class="left">
+            <!-- <li>小程序</li> -->
+        </ul>
+        <div class="middle">
+            <div class="toLeft"><向左</div>
+            <div class="toRight">向右></div>
+        </div>
+        <ul class="right"></ul>
+    </div>
+    <script>
+        var data = ['小程序','jQ','AJAX','Node','React'];
+        var str = '';
+        //初始化
+        $.each(data,function (key,value){
+           str += '<li>' + value + '</li>';
+       })
+        $('.left').html(str);
+        $('.right').html(str);
+        //给li添加点击事件
+        $('ul').on('click','li',function (){
+            $(this).toggleClass('active')
+        })
+        //插入到右边的最前面
+        $('.toRight').on('click',function (){
+            $('.right').prepend($('.left .active').detach());
+            $('.right').children().removeClass('active');
+        })
+        //插入到左边的最前面
+        $('.toLeft').on('click',function (){
+            $('.left').prepend($('.right .active').detach());
+            $('.left').children().removeClass('active');
+        })
+    </script>
+</body>
+</html>
