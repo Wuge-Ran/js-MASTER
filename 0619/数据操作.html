@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        td {
+            text-align: center;
+        }
+        .red{
+            background: red;
+        }
+        .color{
+            background-image: linear-gradient(135deg, #41c8ff 0, #41c8ff 25%,#46e6fe 75%);
+        }
+    </style>
+    <script src="jquery-3.3.1.js">
+
+        //在页面加载完成的时候，把下面这个数据动态添加到表格中
+       
+
+        /*
+            1、根据数据生成表格。
+            2、数据的添加
+            3、全选、单选
+            4、单条删除，选中删除
+            5、排序（按年龄从大到小-从小到大）
+            6、如果是在排序的状态，添加后依然保持排序
+        */
+    </script>
+</head>
+
+<body>
+
+<form action="" name="form">
+    <p>
+        姓名:<input type="text" id="userName" name="username"/>
+    </p>
+    <p>
+        年龄:<input type="text" id="age" name="age"/>
+    </p>
+    <p>
+        性别: <select name="sex" id="sex">
+            <option value=" 男 ">男</option>
+            <option value="女">女</option>
+        </select>
+    </p>
+    <p>
+        <input type="button" id="add" value="添加" name="add"/>
+    </p>
+</form>
+    <input type="button" id="delectAll" value="删除选中"  class="btn"> 
+    <input type="button" value="排序" id="ageSort"  class="btn"> 
+    <table id="tab1" width="100%" border="1">
+
+        <thead>
+        <tr>
+            <th>
+                <input id="checkAll" type="checkbox" /> 全选
+            </th>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <!-- <tr>
+                <td>
+                    <input type="checkbox"/>
+                </td>
+                <td>1</td>
+                <td>LEO</td>
+                <td>36</td>
+                <td>男</td>
+                <td>
+                    <a href="javascript:;">删除</a>
+                </td>
+            </tr> -->
+        </tbody>
+
+    </table>
+    <script>
+        var date = new Date();
+        var data = [{
+            id:date.getTime(),
+            name:'LEO',
+            age:36,
+            sex:'男',
+            checked:false
+        }]
+        //将数据渲染到结构中
+        function html(data){
+            return data.map(function (item){
+                var checked = item.checked ? 'checked' : '';
+                return '<tr>\
+                            <td>\
+                                <input cus_id='+ item.id +' type="checkbox"'+ checked +'/>\
+                            </td>\
+                            <td>' + item.id + '</td>\
+                            <td>' + item.name + '</td>\
+                            <td>' + item.age + '</td>\
+                            <td>' + item.sex + '</td>\
+                            <td>\
+                                <a cus_id='+ item.id +' href="javascript:;">删除</a>\
+                            </td>\
+                        </tr>'
+            })
+        }
+        $('tbody').html(html(data));
+       //先判断输入必须输入姓名和年龄
+       $('#add').on('click',function (){
+           if($('#userName').val()&&$('#age').val()){
+               if(isNaN($('#age').val())){
+                   alert('请输入数字');
+               }else if($('#age').val()>100){
+                   alert('年龄不能大于100岁');
+               }else{
+                    var date = new Date();
+                   //当点击加入后全选为都不选中状态
+                   $('#checkAll').prop('checked',false);
+                   //先加入到数组中,switch判断一下是什么状态
+                   data.push({
+                            id:date.getTime(),
+                            name:$('#userName').val(),
+                            age:$('#age').val(),
+                            sex:$('#sex').val(),
+                            checked:false
+                        })
+                   switch (sta){
+                       
+                       case 0:
+                        break;
+                       case 1:
+                        data.sort(function (a,b){
+                            return a.age - b.age;
+                        })
+                        break;
+                       case 2:
+                       data.sort(function (a,b){
+                            return b.age - a.age;
+                        })
+                        break; 
+                   }
+                   //再渲染一次
+                   $('tbody').html(html(data));
+               }
+           }else{
+               alert('姓名和年龄不能为空');
+           }
+       })
+       //添加全选的功能
+       $('#checkAll').on('click',function (){
+           if($('#checkAll').prop('checked')){
+               //数据与展示保持一致
+               data.forEach(function (item){
+                 item.checked = true;
+               })
+               $('tbody input').prop('checked',true);
+           }else{
+               //数据与展示保持一致
+               data.forEach(function (item){
+                 item.checked = false;
+               })
+               $('tbody input').prop('checked',false);
+           }
+       })
+       //点到每一项全选项的变化
+       var n = 0;
+       $('tbody').on('click','input',function (){
+           var thisId = $(this).attr('cus_id');
+            if($(this).prop('checked')){
+                var obj = data.filter(function (item){
+                    return item.id === +thisId;
+                })
+                
+                obj[0].checked = true;
+                n++;
+            }else{
+                var obj = data.filter(function (item){
+                    return item.id === +thisId;
+                })
+                obj[0].checked = false;
+                n--;
+            }
+            if(n === $('tbody input').length){
+                $('#checkAll').prop('checked',true);
+            }else{
+                $('#checkAll').prop('checked',false);
+            }
+       })
+       //删除选中的功能
+       $('#delectAll').on('click',function (){
+            //删除后n要归零
+            n = 0;
+            //删除数组中的对象
+            data = data.filter(function (item){
+                return !item.checked;
+            })
+            $('tbody').html(html(data));
+            if($('tbody tr').length === 0){
+                $('#checkAll').prop('checked',false);
+            }
+       })
+       //个项删除
+       $('tbody').on('click','a',function(){
+            var thisId = $(this).attr('cus_id');
+            data = data.filter(function (item){
+                return item.id !== +thisId;
+            })
+            $('tbody').html(html(data));
+            //删除的时候注意全选的勾选
+            if($('tbody input:checked').length === $('tbody input').length){
+                $('#checkAll').prop('checked',true);
+            }
+            if($('tbody tr').length === 0){
+                $('#checkAll').prop('checked',false);
+            }
+       })
+       //排序 状态 0为没有点的时候 1为从小到大 2为从大到小
+       var sta = 0;
+       $('#ageSort').on('click',function (){
+           if(sta === 0){
+            sta = 1;
+           }
+           if(sta === 1){
+            sta = 2;
+            data.sort(function (a,b){
+                return b.age - a.age;
+            })
+            $('tbody').html(html(data));
+           }else{
+            sta = 1;
+            data.sort(function (a,b){
+                return a.age - b.age;
+            })
+            $('tbody').html(html(data));
+           }
+       })
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-3.3.1.js"></script>
+</head>
+<body>
+    <input type="text">
+    <ul>
+        <!-- <li><span>1111</span><button>删除</button></li> -->
+    </ul>
+    <script>
+        $('input').on('keydown',function (e){
+            if(e.keyCode === 13){
+                $('ul').append('<li><span>'+ $('input').val() +'</span><button>删除</button></li>');
+                $(this).val('');
+            }
+        })
+    </script>
+</body>
+</html>
