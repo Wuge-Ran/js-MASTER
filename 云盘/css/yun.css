@@ -1,0 +1,193 @@
+body {
+  background-color: #6ea7b2;
+}
+#box {
+  width: 1200px;
+  height: 710px;
+  border-radius: 20px;
+  background-color: #fff;
+  margin: 59px auto;
+}
+#box .title {
+  line-height: 70px;
+}
+#box .title h1 {
+  width: 200px;
+  height: 70px;
+  background: url(../img/tt.jpg) no-repeat 27px 17px;
+  text-indent: -9999px;
+}
+#box .title .user_head {
+  width: 36px;
+  height: 36px;
+  background: url(../img/user-ico.jpg) no-repeat;
+}
+#box .title .arrow_down {
+  width: 36px;
+  height: 36px;
+  background: url(../img/jt2.png) no-repeat 10px 15px;
+}
+#box .title .setting {
+  width: 44px;
+  height: 36px;
+  background: url(../img/set.jpg) no-repeat 15px 10px;
+  border-left: 1px solid #e0e6e7;
+}
+#box .title h1 + div {
+  margin: 22px 25px 0 0;
+}
+#box .tools {
+  height: 60px;
+  background-color: #ecf0f6;
+  border-bottom: 1px solid #d0d9de;
+  overflow: hidden;
+}
+#box .tools .buttons {
+  width: 822px;
+  height: 38px;
+  margin: 10px 0 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+#box .tools .buttons div {
+  width: 108px;
+  line-height: 36px;
+  text-indent: 54px;
+  border: 1px solid #d0d9de;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#box .tools .buttons .download {
+  background: #ffffff url(../img/download.png) no-repeat 21px 10px;
+}
+#box .tools .buttons .share {
+  background: #ffffff url(../img/fenxiang.png) no-repeat 21px 10px;
+}
+#box .tools .buttons .move {
+  text-indent: 44px;
+  background: #ffffff url(../img/move.png) no-repeat 21px 10px;
+}
+#box .tools .buttons .rename {
+  text-indent: 44px;
+  background: #ffffff url(../img/ming.png) no-repeat 21px 10px;
+}
+#box .tools .buttons .dele {
+  background: #ffffff url(../img/delete.png) no-repeat 21px 10px;
+}
+#box .tools .buttons .newFile {
+  width: 152px;
+  background: #ffffff url(../img/ming.png) no-repeat 21px 10px;
+}
+#box .tools .buttons .renew {
+  width: 36px;
+  background: #ffffff url(../img/refresh.png) no-repeat 10px 10px;
+}
+#box .tools .changetype {
+  width: 56px;
+  height: 36px;
+  background: #ffffff url(../img/sort_type.png) no-repeat center;
+  text-indent: -9999px;
+  margin: 11px 23px 0 0;
+  border: 1px solid #d0d9de;
+  border-radius: 4px;
+}
+#box .tools .changetype.active {
+  background: #ffffff url(../img/sort_type2.png) no-repeat center;
+}
+#box #content {
+  height: 580px;
+}
+#box #content .list {
+  box-sizing: border-box;
+  height: 100%;
+  width: 258px;
+  padding-top: 10px;
+  border-right: 2px solid #e1e8ed;
+}
+#box #content .list ul {
+  padding-left: 20px;
+}
+#box #content .list h3 {
+  font: 16px/32px '微软雅黑';
+  text-indent: 60px;
+  color: #949ea4;
+  cursor: pointer;
+}
+#box #content .list h3:hover {
+  color: #55addc;
+}
+#box #content .list h3.active {
+  background: url(../img/flie_open.png) no-repeat 15px 8px;
+}
+#box #content .list h3.no_chlid {
+  background: url(../img/s_folder2.png) no-repeat 36px 8px;
+}
+#box #content .list h3.has_chlid {
+  background: url(../img/flie_close.png) no-repeat 16px 8px;
+}
+#box #content .item {
+  height: 100%;
+  width: 940px;
+}
+#box #content .item nav {
+  width: 100%;
+  line-height: 48px;
+  border-bottom: 2px solid #e1e8ed;
+}
+#box #content .item nav i {
+  width: 16px;
+  height: 16px;
+  border: 1px solid #d0d9de;
+  margin: 15px 27px 0 15px;
+}
+#box #content .item nav i.checked {
+  background: url(../img/checked.png) no-repeat;
+}
+#box #content .item nav div {
+  padding: 0 10px;
+  margin-bottom: -2px;
+  cursor: pointer;
+}
+#box #content .item nav div.active {
+  color: #8bc3e5;
+  border-bottom: 2px solid #55addc;
+}
+#box #content .item nav span {
+  width: 14px;
+  height: 48px;
+  margin: 0 5px;
+  background: url(../img/br_jt.png) no-repeat 0 center;
+}
+#box #content .item .file {
+  background: #f5f8fa;
+  height: 530px;
+}
+#box #content .item .file div {
+  float: left;
+  box-sizing: border-box;
+  margin: 40px 0 40px 40px;
+  width: 178px;
+  height: 178px;
+  background: #ffffff url(../img/folder-b.png) no-repeat center 34px;
+  border-radius: 4px;
+}
+#box #content .item .file div.checked {
+  border: 1px solid #55addc;
+}
+#box #content .item .file div:hover {
+  border: 1px solid #55addc;
+}
+#box #content .item .file div i {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin: 10px 0 0 10px;
+}
+#box #content .item .file div i.checked {
+  background: url(../img/checked.png) no-repeat;
+}
+#box #content .item .file div span {
+  display: block;
+  text-align: center;
+  margin-top: 104px;
+}

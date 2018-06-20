@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/yun.css">
+    <style>
+        /*css reset*/
+        body,h1,h2,h3,h4{
+            margin: 0;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        a{
+            color: #000;
+            text-decoration: none;
+        }
+        img{
+            vertical-align: top;
+        }
+        /*tool*/
+        .clearfix:after{
+            content: "";
+            display: block;
+            clear:both;
+        }
+        .fl{
+            float: left;
+        }
+        .fr{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <header class="title clearfix">
+            <h1 class="fl">
+                logo
+            </h1>
+            <div class="fr">
+                <i class="user_head fl"></i>
+                <i class="arrow_down fl"></i>
+                <i class="setting fl"></i>
+            </div>
+        </header>
+        <div class="tools clearfix">
+            <div class="buttons fl">
+                <div class="download">下载</div>
+                <div class="share">分享</div>
+                <div class="move">移动到</div>
+                <div class="rename">重命名</div>
+                <div class="dele">删除</div>
+                <div class="newFile">新建文件夹</div>
+                <div class="renew"></div>
+            </div>
+            <div class="changetype fr">
+                切换显示
+            </div>
+        </div>
+        <div id="content" class="clearfix">
+            <div class="fl list">
+                <h3 class="active">微云</h3>
+                <ul>
+                    <h3 class="active">JS课程</h3>
+                    <ul>
+                        <h3 class="no_chlid">123</h3>
+                        <h3 class="has_chlid">333</h3>
+                    </ul>
+                </ul>
+            </div>
+            <div class="fl item">
+                <nav class="clearfix">
+                    <i class="fl"></i>
+                    <div class="fl">微云</div>
+                    <span class="fl"></span>
+                    <div class="active fl">JS课程</div>
+                    <span class="fl"></span>
+                    <div class="fl">CSS课程</div>
+                </nav>
+                <div class="file">
+                    <div class="checked"><i class="checked"></i><span>JS基础课程</span></div>
+                    <div><i></i><span>JS基础课程</span></div>
+                    <div><i></i><span>JS基础课程</span></div>
+                    <div><i></i><span>JS基础课程</span></div>
+                    <div><i></i><span>JS基础课程</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+    </script>
+</body>
+</html>
