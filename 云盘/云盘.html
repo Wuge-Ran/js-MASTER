@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/yun.css">
+    <script src="jquery-3.3.1.js"></script>
     <style>
         /*css reset*/
-        body,h1,h2,h3,h4{
+        body,h1,h2,h3,h4,p{
             margin: 0;
         }
         ul{
@@ -37,6 +38,13 @@
     </style>
 </head>
 <body>
+    <div id="del_window">
+        <i class="fr"></i>
+        <h3>确定要删除这个文件夹吗？</h3>
+        <p>已删除的文件可以在回收站找到</p>
+        <div class="ensure">确定</div>
+        <div class="cancel">取消</div>
+    </div>
     <div id="box">
         <header class="title clearfix">
             <h1 class="fl">
@@ -64,36 +72,228 @@
         </div>
         <div id="content" class="clearfix">
             <div class="fl list">
-                <h3 class="active">微云</h3>
+                <!-- <h3 class="active">微云</h3>
                 <ul>
                     <h3 class="active">JS课程</h3>
                     <ul>
                         <h3 class="no_chlid">123</h3>
                         <h3 class="has_chlid">333</h3>
                     </ul>
-                </ul>
+                </ul> -->
             </div>
             <div class="fl item">
                 <nav class="clearfix">
                     <i class="fl"></i>
-                    <div class="fl">微云</div>
-                    <span class="fl"></span>
-                    <div class="active fl">JS课程</div>
-                    <span class="fl"></span>
-                    <div class="fl">CSS课程</div>
+                    <div class="nav clearfix">
+                        <!-- <div class="fl">微云</div>
+                        <span class="fl"></span>
+                        <div class="active fl">JS课程</div>
+                        <span class="fl"></span>
+                        <div class="fl">CSS课程</div> -->
+                    </div>
                 </nav>
                 <div class="file">
-                    <div class="checked"><i class="checked"></i><span>JS基础课程</span></div>
+                    <!-- <div class="checked"><i class="checked"></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
-                    <div><i></i><span>JS基础课程</span></div>
+                    <div><i></i><span>JS基础课程</span></div> -->
                 </div>
             </div>
         </div>
     </div>
     <script>
-        
+        var data = [{
+            title:'微云',
+            id:1001,
+            pid:-1
+        },{
+            title:'JS课程',
+            id:1002,
+            pid:1001
+        },{
+            title:'123',
+            id:1022,
+            pid:1002
+        },{
+            title:'333',
+            id:1202,
+            pid:1002
+        },{
+            title:'333_1',
+            id:2202,
+            pid:1202
+        },{
+            title:'HTML课程',
+            id:1003,
+            pid:1001
+        },{
+            title:'css课程',
+            id:2232,
+            pid:1003
+        },{
+            title:'css课程-1',
+            id:2233,
+            pid:2232
+        },{
+            title:'css课程-2',
+            id:2234,
+            pid:2232
+        },{
+            title:'css课程-3',
+            id:2235,
+            pid:2232
+        },{
+            title:'css课程-4',
+            id:2236,
+            pid:2232
+        },{
+            title:'css课程-5',
+            id:2237,
+            pid:2232
+        }]
+        //通过id找数据
+        function getItemById(id){
+            for(var i = 0;i < data.length;i++){
+                if(data[i].id === id){
+                    return data[i];
+                }
+            }
+            return null;
+        }
+        //通过id找子集
+        function getChildsById(id){
+            var arr = new Array();
+            for(var i = 0;i < data.length;i++){
+                if(data[i].pid === id){
+                    arr.push(data[i]);
+                }   
+            }
+            return arr;
+        }
+        //通过pid找父级
+        function getParentsById(id){
+            var arr = new Array();
+            var item = getItemById(id);
+            if(item){
+                arr.push(item);
+                arr = arr.concat(getParentsById(item.pid));
+            }
+            return arr;
+        }
+        var init = -1;
+        //生成树形结构
+        function createTreeHTML(id){
+            var arr = getChildsById(id);
+            var html = '';
+            if(arr.length){
+                html +='<ul>';
+                for(var i = 0;i < arr.length;i++){
+                    var cla = createTreeHTML(arr[i].id) ? 'active' : 'no_chlid';
+                    html +='<li><h3 class="'+ cla +'" cus_id='+ arr[i].id +'>'+ arr[i].title +'</h3>';
+                    html += createTreeHTML(arr[i].id);
+                    html +='</li>';
+                }
+                html +='</ul>';
+            }
+            return html;
+        }
+        $('#content .list').html(createTreeHTML(init));
+        $('#content .list h3[cus_id="1001"]').css('color','#55addc')
+        //生成bar结构
+        function createBarHTML(id){
+            var arrP = getParentsById(id).reverse();
+            var html = '';
+            for(var i = 0;i < arrP.length;i++){
+                var cla = i ===  arrP.length-1 ? 'active' : '';
+                html += '<div class="fl '+ cla +'" cus_id="'+ arrP[i].id +'">'+ arrP[i].title +'</div>';
+                if(i !==  arrP.length-1){
+                    html +='<span class="fl"></span>';
+                }
+            }
+            return html;
+        }
+        $('.item .nav').html(createBarHTML(1001));
+
+        //生成文件结构
+        function createFileHTML(id){
+            var childs = getChildsById(id);
+            var html = '';
+            if(childs.length){
+                $('.item .file').removeClass('no_file');
+                for(var i = 0;i < childs.length;i++){
+                    html += '<div cus_id="'+ childs[i].id +'"><i></i><span>'+ childs[i].title +'</span></div>'
+                }
+            }else{
+                $('.item .file').addClass('no_file');
+            }
+            return html;
+        }
+        $('.item .file').html(createFileHTML(1001));
+        //交互
+        $('.list').on('click','h3',function (){
+            $('.list h3').css('color','#949ea4');
+            $(this).css('color','#55addc');
+            var id = $(this).attr('cus_id');
+            $('.item .nav').html(createBarHTML(+id));
+            $('.item .file').html(createFileHTML(+id));
+            $('nav i').removeClass('checked');
+        });
+        $('nav .nav').on('click','div',function (){
+            var id = $(this).attr('cus_id');
+            $('.item .nav').html(createBarHTML(+id));
+            $('#content .list h3').css('color','#949ea4');
+            $('#content .list h3[cus_id="'+ id +'"]').css('color','#55addc');
+            $('.item .file').html(createFileHTML(+id));
+            $('nav i').removeClass('checked');
+        });
+        $('.item .file').on('click','div',function (){
+            var id = $(this).attr('cus_id');
+            $('.item .nav').html(createBarHTML(+id));
+            $('.item .file').html(createFileHTML(+id));
+            $('#content .list h3').css('color','#949ea4');
+            $('#content .list h3[cus_id="'+ id +'"]').css('color','#55addc');
+            $('nav i').removeClass('checked');
+        })
+        //全选单选
+        $('nav i').on('click',function (){
+            $(this).toggleClass('checked');
+            var bl = $(this).is('.checked') ? true : false;
+            if(bl){
+                $('.file div').addClass('checked');
+                $('.file div').find('i').addClass('checked');
+            }else{
+                $('.file div').removeClass('checked');
+                $('.file div').find('i').removeClass('checked');
+            }
+        })
+        $('.file').on('mouseover','div',function (){
+
+            $(this).find('i').css('border','1px solid #55addc');
+        });
+        $('.file').on('mouseout','div',function (){
+            if(!$(this).is('.checked')){
+                $(this).find('i').css('border','1px solid transparent');
+            }    
+        });
+        $('.file').on('click','i',function (e){
+            $(this).toggleClass('checked');
+            $(this).parent().toggleClass('checked');
+            var n = 0;
+            $('.file div').each(function (key,item){
+                if($(item).is('.checked')){
+                    n++;
+                }else{
+                    return;
+                }
+            })
+            if(n === $('.file div').length){
+                $('nav i').addClass('checked');
+            }else{
+                $('nav i').removeClass('checked');
+            }
+            e.stopPropagation();
+        })
     </script>
 </body>
 </html>

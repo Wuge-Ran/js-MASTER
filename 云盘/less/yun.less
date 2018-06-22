@@ -1,6 +1,49 @@
 body{
     background-color: #6ea7b2;
 }
+#del_window{
+    width: 318px;
+    height: 178px;
+    border: 1px solid #59afdd;
+    position: absolute;
+    background: #fff url(../img/question.png) no-repeat 32px 48px;
+    left: 100px;
+    top: 50px;
+    display: none;
+    i{
+        width: 15px;
+        height: 15px;
+        background: url(../img/icon_close.png) no-repeat;
+        margin: 10px 10px 0 0;
+    }
+    h3,p,div{
+        text-align: center;
+        height: 30px;
+        line-height: 30px;
+    }
+    h3{
+       margin-top: 40px;
+       padding-left: 60px;
+    }
+    p{
+        padding-left: 60px;
+        margin-bottom: 30px;
+    }
+    .ensure,.cancel{
+        display: inline-block;
+        width: 80px;
+    }
+    .ensure{
+        margin-left: 70px;
+        background: #55addc;
+        color: #fff;
+    }
+    .cancel{
+        box-sizing: border-box;
+        border: 1px solid #59afdd;
+        color: #59afdd;
+    }
+}
 #box{
     width: 1200px;
     height: 710px;
@@ -113,7 +156,7 @@ body{
                     color: #55addc;
                 }
                 &.active{
-                   background: url(../img/flie_open.png) no-repeat 15px 8px; 
+                   background: url(../img/flie_open.png) no-repeat 15px 8px;
                 }
                 &.no_chlid{
                     background: url(../img/s_folder2.png) no-repeat 36px 8px;
@@ -139,9 +182,11 @@ body{
                         background: url(../img/checked.png) no-repeat;
                     }
                 }
+                .nav{
+                    margin-bottom: -2px;
+                }
                 div{
                     padding: 0 10px;
-                    margin-bottom: -2px;
                     cursor: pointer;
                     &.active{
                         color: #8bc3e5;
@@ -158,9 +203,12 @@ body{
             .file{
                 background: #f5f8fa;
                 height: 530px;
+                &.no_file{
+                    background:#f5f8fa url(../img/cover-bg.png) no-repeat center;
+                }
                 div{
                     float: left;
-                    box-sizing: border-box;
+                    border: 1px solid transparent;
                     margin: 40px 0 40px 40px;
                     width: 178px;
                     height: 178px;
@@ -174,6 +222,7 @@ body{
                     }
                     i{
                         display: inline-block;
+                        border: 1px solid transparent;
                         width: 16px;
                         height: 16px;
                         margin: 10px 0 0 10px;

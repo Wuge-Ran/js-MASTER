@@ -1,6 +1,52 @@
 body {
   background-color: #6ea7b2;
 }
+#del_window {
+  width: 318px;
+  height: 178px;
+  border: 1px solid #59afdd;
+  position: absolute;
+  background: #ffffff url(../img/question.png) no-repeat 32px 48px;
+  left: 100px;
+  top: 50px;
+  display: none;
+}
+#del_window i {
+  width: 15px;
+  height: 15px;
+  background: url(../img/icon_close.png) no-repeat;
+  margin: 10px 10px 0 0;
+}
+#del_window h3,
+#del_window p,
+#del_window div {
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+}
+#del_window h3 {
+  margin-top: 40px;
+  padding-left: 60px;
+}
+#del_window p {
+  padding-left: 60px;
+  margin-bottom: 30px;
+}
+#del_window .ensure,
+#del_window .cancel {
+  display: inline-block;
+  width: 80px;
+}
+#del_window .ensure {
+  margin-left: 70px;
+  background: #55addc;
+  color: #fff;
+}
+#del_window .cancel {
+  box-sizing: border-box;
+  border: 1px solid #59afdd;
+  color: #59afdd;
+}
 #box {
   width: 1200px;
   height: 710px;
@@ -143,9 +189,11 @@ body {
 #box #content .item nav i.checked {
   background: url(../img/checked.png) no-repeat;
 }
+#box #content .item nav .nav {
+  margin-bottom: -2px;
+}
 #box #content .item nav div {
   padding: 0 10px;
-  margin-bottom: -2px;
   cursor: pointer;
 }
 #box #content .item nav div.active {
@@ -162,9 +210,12 @@ body {
   background: #f5f8fa;
   height: 530px;
 }
+#box #content .item .file.no_file {
+  background: #f5f8fa url(../img/cover-bg.png) no-repeat center;
+}
 #box #content .item .file div {
   float: left;
-  box-sizing: border-box;
+  border: 1px solid transparent;
   margin: 40px 0 40px 40px;
   width: 178px;
   height: 178px;
@@ -179,6 +230,7 @@ body {
 }
 #box #content .item .file div i {
   display: inline-block;
+  border: 1px solid transparent;
   width: 16px;
   height: 16px;
   margin: 10px 0 0 10px;
