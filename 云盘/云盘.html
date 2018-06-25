@@ -38,13 +38,8 @@
     </style>
 </head>
 <body>
-    <div id="del_window">
-        <i class="fr"></i>
-        <h3>确定要删除这个文件夹吗？</h3>
-        <p>已删除的文件可以在回收站找到</p>
-        <div class="ensure">确定</div>
-        <div class="cancel">取消</div>
-    </div>
+    <div id="bullet">删除成功</div>
+    <div id="mask"></div>
     <div id="box">
         <header class="title clearfix">
             <h1 class="fl">
@@ -71,7 +66,7 @@
             </div>
         </div>
         <div id="content" class="clearfix">
-            <div class="fl list">
+            <div class="list">
                 <!-- <h3 class="active">微云</h3>
                 <ul>
                     <h3 class="active">JS课程</h3>
@@ -81,7 +76,14 @@
                     </ul>
                 </ul> -->
             </div>
-            <div class="fl item">
+            <div class="item">
+                    <div id="del_window">
+                        <i class="fr"></i>
+                        <h3>确定要删除这个文件夹吗？</h3>
+                        <p>已删除的文件可以在回收站找到</p>
+                        <div class="ensure">确定</div>
+                        <div class="cancel">取消</div>
+                    </div>
                 <nav class="clearfix">
                     <i class="fl"></i>
                     <div class="nav clearfix">
@@ -92,17 +94,28 @@
                         <div class="fl">CSS课程</div> -->
                     </div>
                 </nav>
-                <div class="file">
-                    <!-- <div class="checked"><i class="checked"></i><span>JS基础课程</span></div>
+                <div class="file clearfix">
+                    <div class="checked"><i class="checked"></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
-                    <div><i></i><span>JS基础课程</span></div> -->
+                    <div><i></i><span>JS基础课程</span></div>
                 </div>
             </div>
         </div>
     </div>
+    
     <script>
+        //自定义高度
+        var content = document.querySelector('#content');
+        var header = document.querySelector('.title');
+        var tools = document.querySelector('.tools');
+        var contHeight = (document.documentElement.clientHeight - header.offsetHeight - tools.offsetHeight) + 'px';
+        content.style.height = contHeight;
+        window.onresize = function (){
+            var contHeight = (document.documentElement.clientHeight - header.offsetHeight - tools.offsetHeight) + 'px';
+            content.style.height = contHeight;
+        }
         var data = [{
             title:'微云',
             id:1001,
@@ -151,6 +164,10 @@
             title:'css课程-5',
             id:2237,
             pid:2232
+        },{
+            title:'css课程-6',
+            id:2238,
+            pid:2232
         }]
         //通过id找数据
         function getItemById(id){
@@ -171,7 +188,21 @@
             }
             return arr;
         }
-        //通过pid找父级
+        //通过id找所以子孙
+        function getAllchildsById(id){
+            var arr = new Array();
+            var thisOne = getItemById(id);
+            if(thisOne){
+                arr.push(thisOne);
+                var thisOneChilds = getChildsById(id);
+                for(var i = 0;i < thisOneChilds.length;i++){
+                    var cId = thisOneChilds[i].id;
+                    arr = arr.concat(getAllchildsById(cId));
+                }
+            }
+            return arr;
+        }
+        //通过id找父级
         function getParentsById(id){
             var arr = new Array();
             var item = getItemById(id);
@@ -199,7 +230,7 @@
             return html;
         }
         $('#content .list').html(createTreeHTML(init));
-        $('#content .list h3[cus_id="1001"]').css('color','#55addc')
+        $('#content .list h3[cus_id="1001"]').css('color','#55addc');
         //生成bar结构
         function createBarHTML(id){
             var arrP = getParentsById(id).reverse();
@@ -222,7 +253,8 @@
             if(childs.length){
                 $('.item .file').removeClass('no_file');
                 for(var i = 0;i < childs.length;i++){
-                    html += '<div cus_id="'+ childs[i].id +'"><i></i><span>'+ childs[i].title +'</span></div>'
+                    html += '<div cus_id="'+ childs[i].id +'"><i></i><span>'+ childs[i].title +'</span><input type="text"/></div>'
+                   
                 }
             }else{
                 $('.item .file').addClass('no_file');
@@ -262,13 +294,14 @@
             if(bl){
                 $('.file div').addClass('checked');
                 $('.file div').find('i').addClass('checked');
+                $('.file').find('i').css('border','1px solid #55addc');
             }else{
                 $('.file div').removeClass('checked');
                 $('.file div').find('i').removeClass('checked');
+                $('.file').find('i').css('border','1px solid transparent');
             }
         })
         $('.file').on('mouseover','div',function (){
-
             $(this).find('i').css('border','1px solid #55addc');
         });
         $('.file').on('mouseout','div',function (){
@@ -294,6 +327,119 @@
             }
             e.stopPropagation();
         })
+        //弹框方法
+        var bullet = document.querySelector('#bullet');
+        function showBul(){
+            tweenMove({
+                ele : bullet,
+                attr : 'top',
+                target : 0,
+                duration : 600,
+                callback:function (){
+                    setTimeout(function (){
+                        tweenMove({
+                            ele : bullet,
+                            attr : 'top',
+                            target : -40,
+                            duration : 600,
+                        })
+                    },600)
+                }
+            });
+        }
+        //点按删除
+        $('.buttons .dele').on('click',function (){
+            if($('.file>div').is('.checked')){
+                $('#mask').css('display','block');
+                $('#del_window').css('display','block');
+            }else{
+                $('#bullet').text('你什么都没选，删什么!?弱智吗？').css('background','#ef8989');
+                showBul();
+            }
+            $('#del_window i').on('click',function (){
+                $('#mask').css('display','none');
+                $('#del_window').css('display','none');
+            })
+            $('#del_window .cancel').on('click',function (){
+                $('#mask').css('display','none');
+                $('#del_window').css('display','none');
+            })
+            $('#del_window .ensure').on('click',function (){
+                var treeActiveId = +$('.nav >.active').attr('cus_id');
+                var arr = [];
+                $('.file>.checked').each(function (key,item){
+                    arr.push(+$(item).attr('cus_id'));
+                });
+                var arr2 = [];
+                for(var i = 0;i < arr.length;i++){
+                    arr2 = arr2.concat(getAllchildsById(arr[i]));
+                }
+                for(var i = 0;i < arr2.length;i++){
+                    for(var j = 0;j < data.length;j++){
+                        if(arr2[i].id === data[j].id){
+                            data.splice(j,1);
+                            break;
+                        }
+                    }
+                }
+                $('#mask').css('display','none');
+                $('#del_window').css('display','none');
+                $('#bullet').text('删除成功').css('background','#86ce8b');
+                showBul();
+                //重新生成三个结构
+                $('#content .list').html(createTreeHTML(init));
+                $('#content .list h3[cus_id="'+ treeActiveId +'"]').css('color','#55addc');
+                $('.item .nav').html(createBarHTML(treeActiveId));
+                $('.item .file').html(createFileHTML(treeActiveId));
+            })
+        })
+        //input输入修改
+        $('.rename').on('click',function (e){
+            //阻止事件冒泡
+            $('.file > .checked input').on('click',function (e){
+                e.stopPropagation();
+            })
+            $('.file > .checked input').on('mousedown',function (e){
+                e.stopPropagation();
+            })
+            if($('.file > .checked').length ===1){
+                $('.file > .checked input').css('display','block');
+            }else if($('.file > .checked').length){
+                $('#bullet').text('只能选择一个文件重命名').css('background','#ef8989');
+                showBul();
+            }else{
+                $('#bullet').text('没有选中的文件，请选择后再删除').css('background','#ef8989');
+                showBul();
+            }
+            e.stopPropagation();
+        })
+        $(document).on('mousedown',function (){
+            
+            var bl = true;
+            $('.file span').each(function (index,item){
+                if($(item).text()===$('.file > .checked input').val()){
+                    $('#bullet').text('文件名不能重复').css('background','#ef8989');
+                    showBul();
+                    bl = false;
+                    return;
+                }
+            })
+            if($('.file > .checked input').val() && bl){
+               var cur_id = $('.file > .checked').attr('cus_id');
+               $('.file > .checked span').text($('.file > .checked input').val());
+               data.forEach(function (item){
+                   if(item.id == cur_id){
+                    item.title = $('.file > .checked input').val();
+                   }
+               })
+               //重新生成树状结构
+                $('#content .list').html(createTreeHTML(init));
+            }
+            $('.file > .checked input').css('display','none').val('');
+        })
+        
+       
     </script>
+    <script src="js/tools.js"></script>
 </body>
 </html>

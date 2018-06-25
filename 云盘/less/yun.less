@@ -1,5 +1,29 @@
 body{
     background-color: #6ea7b2;
+    overflow: hidden;
+}
+.border{
+    background: red;
+    opacity: .5;
+    position: absolute;
+    z-index: 20;
+}
+#mask{
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+#bullet{
+    padding:0 20px;
+    font: 16px/40px '微软雅黑';
+    color: #fff;
+    position: absolute;
+    left: 45%;
+    top: -40px;
+    background: #86ce8b;
+    border-radius: 4px;
 }
 #del_window{
     width: 318px;
@@ -7,8 +31,12 @@ body{
     border: 1px solid #59afdd;
     position: absolute;
     background: #fff url(../img/question.png) no-repeat 32px 48px;
-    left: 100px;
-    top: 50px;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
     display: none;
     i{
         width: 15px;
@@ -32,6 +60,7 @@ body{
     .ensure,.cancel{
         display: inline-block;
         width: 80px;
+        cursor: pointer;
     }
     .ensure{
         margin-left: 70px;
@@ -45,11 +74,8 @@ body{
     }
 }
 #box{
-    width: 1200px;
-    height: 710px;
-    border-radius: 20px;
+    height: 100%;
     background-color: #fff;
-    margin: 59px auto;
     .title{
         line-height: 70px;
         h1{
@@ -82,7 +108,6 @@ body{
         height: 60px;
         background-color: #ecf0f6;
         border-bottom:1px solid #d0d9de; 
-        overflow: hidden;
         .buttons{
             width: 822px;
             height: 38px;
@@ -137,13 +162,16 @@ body{
         }
     }
     #content{
-        height: 580px;
+        position: relative;
         .list{
             box-sizing: border-box;
             height: 100%;
-            width: 258px;
+            width: 280px;
+            position: absolute;
             padding-top:10px; 
             border-right: 2px solid #e1e8ed;
+            background: #fff;
+            overflow: auto;
             ul{
                 padding-left: 20px;
             }
@@ -168,10 +196,12 @@ body{
         }
         .item{
             height: 100%;
-            width: 940px;
+            padding-left: 280px;
+            background: #f5f8fa;
             nav{
                 width: 100%;
                 line-height: 48px;
+                background-color: #fff;
                 border-bottom: 2px solid #e1e8ed;
                 i{
                     width: 16px;
@@ -201,19 +231,28 @@ body{
                 }
             }
             .file{
-                background: #f5f8fa;
-                height: 530px;
+                position: relative;
+                overflow: auto;
+                height: 100%;
                 &.no_file{
                     background:#f5f8fa url(../img/cover-bg.png) no-repeat center;
                 }
                 div{
                     float: left;
+                    position: relative;
                     border: 1px solid transparent;
                     margin: 40px 0 40px 40px;
                     width: 178px;
                     height: 178px;
                     background: #fff url(../img/folder-b.png) no-repeat center 34px;
                     border-radius:4px;
+                    background-clip:content-box;
+                    input{
+                        position: absolute;
+                        left: 6px;
+                        top: 134px;
+                        display: none;
+                    }
                     &.checked{
                         border: 1px solid #55addc;
                     }
@@ -226,6 +265,7 @@ body{
                         width: 16px;
                         height: 16px;
                         margin: 10px 0 0 10px;
+                        border-radius: 4px;
                         &.checked{
                             background:url(../img/checked.png) no-repeat;
                         }

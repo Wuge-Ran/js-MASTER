@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<div onclick="click">324342342</div>
+<body>
+    <script>
+        var c ='<div onclick="click">dqweqweq</div>'    ;
+        function click(){
+            console.log(111);
+        }
+        // document.body.innerHTML = c;
+
+         var oD=document.body.children[0];
+    // 变量temp 存着字符串“外面”
+    var temp='外面';
+    // 定义一个函数f
+    function f(){ 
+        // 局部变量temp 保存着'内部'
+        var temp='内部';
+        oD.innerHTML='<span onclick="obj.m(temp)">js代码添加的</span>';
+    }
+    // 定义一个对象 及 它的方法
+    var obj={};
+    obj.m=function(type){
+        console.log(111); 
+    };
+    // 调用f
+    f();
+    </script>
+</body>
+</html>
