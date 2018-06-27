@@ -200,7 +200,13 @@ function collision(hit,hited){
 }
 var oFile = document.querySelector('.file');
 //框选方法
+document.oncontextmenu = function(){
+	　　return false;
+}
 oFile .onmousedown = function (ev){
+	if(ev.which !== 1){
+		return;
+	}
 	ev.preventDefault();
 	var fileAll = document.querySelectorAll('.file > div');
 	var div = document.createElement('div');
@@ -210,12 +216,13 @@ oFile .onmousedown = function (ev){
 	var mouseTop = ev.clientY;
 	var mouseLeft = ev.clientX;
 	document.onmousemove = function (ev){
-		if(Math.abs(mouseTop - ev.clientY) > 10){
+		ev.preventDefault();
+		
+		if(Math.abs(mouseTop - ev.clientY) > 10||Math.abs(mouseLeft - ev.clientX) > 10){
 			div.style.height = Math.abs(mouseTop - ev.clientY) + 'px';
 			div.style.width = Math.abs(mouseLeft - ev.clientX) + 'px';
 			div.style.top = Math.min(mouseTop,ev.clientY) + 'px';
 			div.style.left = Math.min(mouseLeft,ev.clientX) + 'px';
-			console.log(fileAll);
 			for(var i = 0;i < fileAll.length;i++){
 				if(collision(div,fileAll[i])){
 					fileAll[i].classList.add('checked');
@@ -235,15 +242,23 @@ oFile .onmousedown = function (ev){
                     return;
                 }
             })
-            if(n === $('.file div').length){
+            if(n === $('.file div').length && $('.file div').length !==0){
                 $('nav i').addClass('checked');
             }else{
                 $('nav i').removeClass('checked');
             }
 		}
+		if(ev.clientY < oFile.getBoundingClientRect().top){
+			div.style.top = oFile.getBoundingClientRect().top + 'px';
+			div.style.height = Math.abs(mouseTop - ev.clientY) -(oFile.getBoundingClientRect().top - ev.clientY)  + 'px';
+		}
+		if(ev.clientX < oFile.getBoundingClientRect().left){
+			div.style.left = oFile.getBoundingClientRect().left + 'px';
+			div.style.width = Math.abs(mouseLeft - ev.clientX) -(oFile.getBoundingClientRect().left - ev.clientX)  + 'px';
+		}
 	}
 	document.onmouseup = function (){
-		document.onmousemove = document.onmouseup = null;
+		document.onmousemove = document.onmousemove =null;
 		div.remove();
 	}
 	

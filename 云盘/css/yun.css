@@ -3,7 +3,7 @@ body {
   overflow: hidden;
 }
 .border {
-  background: red;
+  background: #555555;
   opacity: .5;
   position: absolute;
   z-index: 20;
@@ -14,6 +14,8 @@ body {
   display: none;
   position: absolute;
   z-index: 1;
+  background: #555555;
+  opacity: .3;
 }
 #bullet {
   padding: 0 20px;
@@ -74,6 +76,96 @@ body {
 #del_window .cancel {
   box-sizing: border-box;
   border: 1px solid #59afdd;
+  color: #59afdd;
+}
+#move_window {
+  display: none;
+  position: absolute;
+  width: 366px;
+  height: 416px;
+  padding: 0 20px;
+  border: 2px solid #55addc;
+  border-radius: 6px;
+  background: #fff;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 5;
+}
+#move_window .att {
+  position: absolute;
+  padding: 0 10px;
+  font: 14px/28px '微软雅黑';
+  border-radius: 14px;
+  background: #ef8989;
+  color: #fff;
+  left: 150px;
+  top: 53px;
+  display: none;
+}
+#move_window i {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 15px;
+  right: 15px;
+  background: url(../img/icon_close.png) no-repeat;
+}
+#move_window h3 {
+  font: 16px/55px '微软雅黑';
+}
+#move_window h4 {
+  font: 14px/24px '微软雅黑';
+  text-indent: 35px;
+  background: url(../img/small_folder.png) no-repeat;
+}
+#move_window .list_mini {
+  width: 358px;
+  height: 238px;
+  border: 1px solid #e1e8ed;
+  margin: 18px 0;
+  overflow: auto;
+}
+#move_window .list_mini ul {
+  padding-left: 20px;
+}
+#move_window .list_mini h3 {
+  font: 16px/32px '微软雅黑';
+  text-indent: 60px;
+  color: #949ea4;
+  cursor: pointer;
+}
+#move_window .list_mini h3.active {
+  background: url(../img/flie_open.png) no-repeat 15px 8px;
+}
+#move_window .list_mini h3.no_chlid {
+  background: url(../img/s_folder2.png) no-repeat 36px 8px;
+}
+#move_window .list_mini h3.has_chlid {
+  background: url(../img/flie_close.png) no-repeat 16px 8px;
+}
+#move_window .list_mini h3.checked {
+  color: #55addc;
+}
+#move_window .ensure,
+#move_window .cancel {
+  display: inline-block;
+  width: 80px;
+  line-height: 28px;
+  text-align: center;
+  border: 1px solid #59afdd;
+  cursor: pointer;
+}
+#move_window .ensure {
+  margin-left: 85px;
+  background: #55addc;
+  color: #fff;
+}
+#move_window .cancel {
+  margin-left: 20px;
+  box-sizing: border-box;
   color: #59afdd;
 }
 #box {
@@ -257,8 +349,11 @@ body {
 }
 #box #content .item .file div input {
   position: absolute;
+  width: 160px;
   left: 6px;
   top: 134px;
+  font-size: 16px;
+  text-align: center;
   display: none;
 }
 #box #content .item .file div.checked {

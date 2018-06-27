@@ -3,7 +3,7 @@ body{
     overflow: hidden;
 }
 .border{
-    background: red;
+    background: #555555;
     opacity: .5;
     position: absolute;
     z-index: 20;
@@ -14,6 +14,8 @@ body{
     display: none;
     position: absolute;
     z-index: 1;
+    background: #555555;
+    opacity: .3;
 }
 #bullet{
     padding:0 20px;
@@ -70,6 +72,95 @@ body{
     .cancel{
         box-sizing: border-box;
         border: 1px solid #59afdd;
+        color: #59afdd;
+    }
+}
+#move_window{
+    display: none;
+    position: absolute;
+    width: 366px;
+    height: 416px;
+    padding: 0 20px;
+    border: 2px solid #55addc;
+    border-radius: 6px; 
+    background: #fff;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 5;
+    .att{
+        position: absolute;
+        padding: 0 10px;
+        font: 14px/28px '微软雅黑';
+        border-radius: 14px; 
+        background: #ef8989;
+        color: #fff;
+        left: 150px;
+        top: 53px;
+        display: none;
+    }
+    i{
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        top: 15px;
+        right: 15px;
+        background: url(../img/icon_close.png) no-repeat;
+    }
+    h3{
+        font: 16px/55px '微软雅黑';
+    }
+    h4{
+        font: 14px/24px '微软雅黑';
+        text-indent: 35px;
+        background: url(../img/small_folder.png) no-repeat;
+    }
+    .list_mini{
+        width: 358px;
+        height: 238px;
+        border: 1px solid #e1e8ed;
+        margin: 18px 0;
+        overflow: auto;
+        ul{
+            padding-left: 20px;
+        }
+        h3{
+            font:16px/32px '微软雅黑'; 
+            text-indent: 60px;
+            color: #949ea4;
+            cursor: pointer;
+            &.active{
+               background: url(../img/flie_open.png) no-repeat 15px 8px;
+            }
+            &.no_chlid{
+                background: url(../img/s_folder2.png) no-repeat 36px 8px;
+            }
+            &.has_chlid{
+                background: url(../img/flie_close.png) no-repeat 16px 8px;
+            }
+            &.checked{
+                color: #55addc;
+            }
+        }
+    }
+    .ensure,.cancel{
+        display: inline-block;
+        width: 80px;
+        line-height: 28px;
+        text-align: center;
+        border: 1px solid #59afdd;
+        cursor: pointer;
+    }
+    .ensure{
+        margin-left: 85px;
+        background: #55addc;
+        color: #fff;
+    }
+    .cancel{
+        margin-left: 20px;
+        box-sizing: border-box;
         color: #59afdd;
     }
 }
@@ -249,8 +340,11 @@ body{
                     background-clip:content-box;
                     input{
                         position: absolute;
+                        width: 160px;
                         left: 6px;
                         top: 134px;
+                        font-size:16px; 
+                        text-align: center;
                         display: none;
                     }
                     &.checked{

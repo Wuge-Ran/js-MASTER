@@ -77,13 +77,31 @@
                 </ul> -->
             </div>
             <div class="item">
-                    <div id="del_window">
-                        <i class="fr"></i>
-                        <h3>确定要删除这个文件夹吗？</h3>
-                        <p>已删除的文件可以在回收站找到</p>
-                        <div class="ensure">确定</div>
-                        <div class="cancel">取消</div>
+                <div id="del_window">
+                    <i class="fr"></i>
+                    <h3>确定要删除这个文件夹吗？</h3>
+                    <p>已删除的文件可以在回收站找到</p>
+                    <div class="ensure">确定</div>
+                    <div class="cancel">取消</div>
+                </div>
+                <div id="move_window">
+                    <i></i>
+                    <div class="att">不能移动到自己或者子级文件</div>
+                    <h3>选择储存位置</h3>
+                    <h4>JS基础课程</h4>
+                    <div class="list_mini">
+                        <!-- <h3 class="active">微云</h3>
+                        <ul>
+                            <h3 class="active">JS课程</h3>
+                            <ul>
+                                <h3 class="no_chlid">123</h3>
+                                <h3 class="has_chlid">333</h3>
+                            </ul>
+                        </ul> -->
                     </div>
+                    <div class="ensure">确定</div>
+                    <div class="cancel">取消</div>
+                </div>
                 <nav class="clearfix">
                     <i class="fl"></i>
                     <div class="nav clearfix">
@@ -95,16 +113,15 @@
                     </div>
                 </nav>
                 <div class="file clearfix">
-                    <div class="checked"><i class="checked"></i><span>JS基础课程</span></div>
+                    <!-- <div class="checked"><i class="checked"></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
                     <div><i></i><span>JS基础课程</span></div>
-                    <div><i></i><span>JS基础课程</span></div>
+                    <div><i></i><span>JS基础课程</span></div> -->
                 </div>
             </div>
         </div>
     </div>
-    
     <script>
         //自定义高度
         var content = document.querySelector('#content');
@@ -116,7 +133,8 @@
             var contHeight = (document.documentElement.clientHeight - header.offsetHeight - tools.offsetHeight) + 'px';
             content.style.height = contHeight;
         }
-        var data = [{
+        var data = [
+            {
             title:'微云',
             id:1001,
             pid:-1
@@ -168,7 +186,8 @@
             title:'css课程-6',
             id:2238,
             pid:2232
-        }]
+        }
+    ]
         //通过id找数据
         function getItemById(id){
             for(var i = 0;i < data.length;i++){
@@ -245,7 +264,6 @@
             return html;
         }
         $('.item .nav').html(createBarHTML(1001));
-
         //生成文件结构
         function createFileHTML(id){
             var childs = getChildsById(id);
@@ -253,8 +271,8 @@
             if(childs.length){
                 $('.item .file').removeClass('no_file');
                 for(var i = 0;i < childs.length;i++){
-                    html += '<div cus_id="'+ childs[i].id +'"><i></i><span>'+ childs[i].title +'</span><input type="text"/></div>'
-                   
+                    html += '<div cus_id="'+ childs[i].id +'"><i></i><span>'+ childs[i].title 
+                        +'</span><input type="text"/></div>';
                 }
             }else{
                 $('.item .file').addClass('no_file');
@@ -270,6 +288,7 @@
             $('.item .nav').html(createBarHTML(+id));
             $('.item .file').html(createFileHTML(+id));
             $('nav i').removeClass('checked');
+            iIsVisi();
         });
         $('nav .nav').on('click','div',function (){
             var id = $(this).attr('cus_id');
@@ -278,6 +297,7 @@
             $('#content .list h3[cus_id="'+ id +'"]').css('color','#55addc');
             $('.item .file').html(createFileHTML(+id));
             $('nav i').removeClass('checked');
+            iIsVisi();
         });
         $('.item .file').on('click','div',function (){
             var id = $(this).attr('cus_id');
@@ -286,7 +306,18 @@
             $('#content .list h3').css('color','#949ea4');
             $('#content .list h3[cus_id="'+ id +'"]').css('color','#55addc');
             $('nav i').removeClass('checked');
+            iIsVisi();
         })
+        //是否显示全选按钮
+        function iIsVisi(){
+            var oI = document.querySelector('.item nav i');
+            var files = document.querySelectorAll('.item .file > div');
+            if(!files.length){
+                oI.style.visibility = 'hidden';
+            }else{
+                oI.style.visibility = 'visible';
+            }
+        }
         //全选单选
         $('nav i').on('click',function (){
             $(this).toggleClass('checked');
@@ -327,7 +358,7 @@
             }
             e.stopPropagation();
         })
-        //弹框方法
+        //弹框提示的方法
         var bullet = document.querySelector('#bullet');
         function showBul(){
             tweenMove({
@@ -353,7 +384,7 @@
                 $('#mask').css('display','block');
                 $('#del_window').css('display','block');
             }else{
-                $('#bullet').text('你什么都没选，删什么!?弱智吗？').css('background','#ef8989');
+                $('#bullet').text('你什么都没选，删什么!?').css('background','#ef8989');
                 showBul();
             }
             $('#del_window i').on('click',function (){
@@ -391,10 +422,13 @@
                 $('#content .list h3[cus_id="'+ treeActiveId +'"]').css('color','#55addc');
                 $('.item .nav').html(createBarHTML(treeActiveId));
                 $('.item .file').html(createFileHTML(treeActiveId));
+
+                iIsVisi();
             })
         })
-        //input输入修改
+        //input输入修改名称
         $('.rename').on('click',function (e){
+            $('.tools').data('Features',1)
             //阻止事件冒泡
             $('.file > .checked input').on('click',function (e){
                 e.stopPropagation();
@@ -403,7 +437,9 @@
                 e.stopPropagation();
             })
             if($('.file > .checked').length ===1){
-                $('.file > .checked input').css('display','block');
+                $('.file > .checked input').css('display','block').val($('.file > .checked span').text());
+                var oInput = document.querySelector('.file .checked input');
+                $(oInput).focus().select();
             }else if($('.file > .checked').length){
                 $('#bullet').text('只能选择一个文件重命名').css('background','#ef8989');
                 showBul();
@@ -414,31 +450,196 @@
             e.stopPropagation();
         })
         $(document).on('mousedown',function (){
-            
-            var bl = true;
-            $('.file span').each(function (index,item){
-                if($(item).text()===$('.file > .checked input').val()){
-                    $('#bullet').text('文件名不能重复').css('background','#ef8989');
+            //1是重命名的功能
+            if($('.tools').data('Features')===1){
+                var bl = true;
+                $('.file div:not(.checked)').find('span').each(function (index,item){
+                    if($(item).text()===$('.file > .checked input').val()){
+                        $('#bullet').text('文件名不能重复').css('background','#ef8989');
+                        showBul();
+                        bl = false;
+                        return;
+                    }
+                })
+                if($('.file > .checked input').val() && bl){
+                    var cur_id = $('.file > .checked').attr('cus_id');
+                    var p_id = $('.nav .active').attr('cus_id'); 
+                    $('.file > .checked span').text($('.file > .checked input').val());
+                    data.forEach(function (item){
+                        if(item.id == cur_id){
+                            item.title = $('.file > .checked input').val();
+                        }
+                    })
+                    //重新生成树状结构
+                    $('#content .list').html(createTreeHTML(init));
+                    $('#bullet').text('重命名成功').css('background','#86ce8b');
+                    $('#content .list h3[cus_id="'+ p_id +'"]').css('color','#55addc');
+                    showBul();
+                    $('.file > .checked input').css('display','none').val('');
+                    $('.tools').data('Features',0);
+                    iIsVisi();
+                }
+            }else if($('.tools').data('Features')===2){
+                //2是新建的功能
+                var bl = true;
+                if(!$('.file input').eq(0).val()){
+                    $('#bullet').text('新建名不能为空!').css('background','#ef8989');
                     showBul();
                     bl = false;
+                    $('.file div').eq(0).remove();
+                    $('.tools').data('Features',0);
+                    if($('.file div').length===0){
+                        $('.file').addClass('no_file');
+                    }
                     return;
                 }
-            })
-            if($('.file > .checked input').val() && bl){
-               var cur_id = $('.file > .checked').attr('cus_id');
-               $('.file > .checked span').text($('.file > .checked input').val());
-               data.forEach(function (item){
-                   if(item.id == cur_id){
-                    item.title = $('.file > .checked input').val();
-                   }
-               })
-               //重新生成树状结构
-                $('#content .list').html(createTreeHTML(init));
+                $('.file div span').each(function (index,item){
+                    if($(item).text()===$('.file input').eq(0).val()){
+                        $('#bullet').text('新建名不能重复').css('background','#ef8989');
+                        showBul();
+                        $('.file div').eq(0).remove();
+                        bl = false;
+                        $('.tools').data('Features',0);
+                        return;
+                    }
+                })
+                if(bl){
+                    var cur_id = $('.file div').eq(0).attr('cus_id');
+                    var p_id = $('.nav .active').attr('cus_id');
+                    var obj = {
+                        title:$('.file input').eq(0).val(),
+                        id:+cur_id,
+                        pid:+p_id
+                    }
+                    data.unshift(obj);
+                    //重新生成树状结构
+                    $('#content .list').html(createTreeHTML(init));
+                    $('#content .list h3[cus_id="'+ p_id +'"]').css('color','#55addc');
+                    $('#bullet').text('新建成功').css('background','#86ce8b');
+                    $('.item .file').html(createFileHTML(+p_id));
+                    showBul();
+                    $('.file input').eq(0).css('display','none').val('');
+                    $('.tools').data('Features',0);
+                    iIsVisi();
+                    $('.item nav>i').removeClass('checked');
+                    return;
+                }
             }
-            $('.file > .checked input').css('display','none').val('');
+        })
+        //新建
+        $('.newFile').on('click',function (ev){
+            ev.stopPropagation();
+            $('.tools').data('Features',2);
+            var data = new Date();
+            //这个位置可以使用一个函数传入结构
+            $('.file').prepend('<div cus_id="'+ data.getTime() +'"><i></i><span></span><input style="display:block" type="text"/></div>').removeClass('no_file');
+            //阻止事件冒泡
+            $('.file input').on('click',function (e){
+                e.stopPropagation();
+            })
+            $('.file input').on('mousedown',function (e){
+                e.stopPropagation();
+            })
+            var oInput = document.querySelectorAll('.file input')[0];
+            oInput.focus();
+        })
+        //移动到
+        var arr = [];
+        $('.move').on('click',function (){
+            arr = [];
+            if($('.file > .checked').length){
+                $('.file > .checked').each(function (index,item){
+                    arr = arr.concat(getAllchildsById(+$(item).attr('cus_id')));
+                })
+                $('#content .list_mini').html(createTreeHTML(init));
+                $('#move_window').show(500);
+                $('#mask').show();
+            }else{
+                $('#bullet').text('请选择需要移动的文件夹').css('background','#ef8989');
+                showBul();
+            }
+        })
+        var id = -999;
+        //点击字体颜色改变
+        $('.list_mini').on('click','h3',function (){
+            id = +$(this).attr('cus_id');
+            $('#move_window h3').removeClass('checked');
+            $(this).addClass('checked');
+        })
+        $('#move_window .ensure').on('click',function (ev){
+            ev.stopPropagation();
+            var thisId = +$('.nav > .active').attr('cus_id');
+            var bl = true;
+            if(id>-999){
+                arr.forEach(function (item){
+                    if(id === item.id){
+                        $('#move_window>.att').fadeIn(300,function (){
+                            setTimeout(function (){
+                                $('#move_window>.att').fadeOut(300);
+                            },500)
+                        });
+                        bl = false;
+                        return;
+                    }
+                })
+                if(bl){
+                    var thisArr = [];
+                    var childs =  getChildsById(id);
+                    $('.file > .checked').each(function (index,item){
+                        thisArr.push(item);
+                    })
+                    if(childs.length){
+                        for(var i = 0;i < childs.length;i++){
+                            for(var j = 0;j < thisArr.length;j++)
+                            console.log(childs[i].title,thisArr[j].innerText);
+                            // if(childs[i].title === thisArr[j].innerText){
+                                
+                            // }
+                        }
+                    }
+                    // $(thisArr).each(function (index,item){
+                    //     for(var i = 0;i < data.length;i++){
+                    //         if(item === data[i].id){
+                    //             data[i].pid = id;
+                    //             break;
+                    //         }
+                    //     }
+                    // })
+                    //重新生成三个结构
+                    $('#content .list').html(createTreeHTML(init));
+                    $('#content .list h3[cus_id="'+ thisId +'"]').css('color','#55addc');
+                    $('.item .nav').html(createBarHTML(thisId));
+                    $('.item .file').html(createFileHTML(thisId));
+                    iIsVisi();
+                    $('#move_window').hide(500);
+                    $('#mask').hide();
+                    $('#move_window>.att').hide();
+                    $('nav > .checked').removeClass('checked');
+                    //重置id
+                    id = -999;
+                    
+                }
+            }else{
+                $('#move_window>.att').text('请选择想要移动的文件夹');
+                $('#move_window>.att').fadeIn(300,function (){
+                            setTimeout(function (){
+                                $('#move_window>.att').fadeOut(300);
+                            },500)
+                        });    
+            }
+        })
+        //关闭移动到窗口
+        $('#move_window>i').on('click',function (){
+            $('#move_window').hide(500);
+            $('#mask').hide();
+            $('#move_window>.att').hide();
+        })
+        $('#move_window>.cancel').on('click',function (){
+            $('#move_window').hide(500);
+            $('#mask').hide();
+            $('#move_window>.att').hide();
         })
         
-       
     </script>
     <script src="js/tools.js"></script>
 </body>
