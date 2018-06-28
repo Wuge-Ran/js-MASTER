@@ -332,6 +332,7 @@
                 $('.file').find('i').css('border','1px solid transparent');
             }
         })
+        //鼠标移入时要出现border
         $('.file').on('mouseover','div',function (){
             $(this).find('i').css('border','1px solid #55addc');
         });
@@ -360,23 +361,18 @@
         })
         //弹框提示的方法
         var bullet = document.querySelector('#bullet');
+        var timer = null;
         function showBul(){
-            tweenMove({
-                ele : bullet,
-                attr : 'top',
-                target : 0,
-                duration : 600,
-                callback:function (){
-                    setTimeout(function (){
-                        tweenMove({
-                            ele : bullet,
-                            attr : 'top',
-                            target : -40,
-                            duration : 600,
-                        })
-                    },600)
-                }
-            });
+            clearTimeout(timer);
+            $(bullet).css('top',-45);
+            bullet.style.transition = 'none';
+            setTimeout(function (){
+                bullet.style.transition = '.5s';
+                $(bullet).css('top',0);
+            })
+            timer = setTimeout(function (){
+                $(bullet).css('top',-45);
+            },1500)
         }
         //点按删除
         $('.buttons .dele').on('click',function (){
@@ -395,6 +391,8 @@
                 $('#mask').css('display','none');
                 $('#del_window').css('display','none');
             })
+            //先清一下事件再绑定
+            $('#del_window .ensure').off('click');
             $('#del_window .ensure').on('click',function (){
                 var treeActiveId = +$('.nav >.active').attr('cus_id');
                 var arr = [];
@@ -422,7 +420,6 @@
                 $('#content .list h3[cus_id="'+ treeActiveId +'"]').css('color','#55addc');
                 $('.item .nav').html(createBarHTML(treeActiveId));
                 $('.item .file').html(createFileHTML(treeActiveId));
-
                 iIsVisi();
             })
         })
@@ -570,9 +567,12 @@
             ev.stopPropagation();
             var thisId = +$('.nav > .active').attr('cus_id');
             var bl = true;
+            //如果选择了想移动的文件夹，则id必定大于-999
+            console.log(id);
             if(id>-999){
                 arr.forEach(function (item){
                     if(id === item.id){
+                        $('#move_window>.att').text('不能移动到自己或者子级文件');
                         $('#move_window>.att').fadeIn(300,function (){
                             setTimeout(function (){
                                 $('#move_window>.att').fadeOut(300);
@@ -582,29 +582,49 @@
                         return;
                     }
                 })
+                //如果循环结束了，bl还是等于true证明不是自己或子集
                 if(bl){
                     var thisArr = [];
                     var childs =  getChildsById(id);
+                    var allLength = $('.file > .checked').length;
                     $('.file > .checked').each(function (index,item){
                         thisArr.push(item);
                     })
+                    var n = 0;
                     if(childs.length){
                         for(var i = 0;i < childs.length;i++){
-                            for(var j = 0;j < thisArr.length;j++)
-                            console.log(childs[i].title,thisArr[j].innerText);
-                            // if(childs[i].title === thisArr[j].innerText){
-                                
-                            // }
+                            for(var j = 0;j < thisArr.length;j++){
+                                if(childs[i].title === thisArr[j].innerText.trim()){
+                                    thisArr.splice(j,1);
+                                   n++;
+                                }
+                            }
                         }
                     }
-                    // $(thisArr).each(function (index,item){
-                    //     for(var i = 0;i < data.length;i++){
-                    //         if(item === data[i].id){
-                    //             data[i].pid = id;
-                    //             break;
-                    //         }
-                    //     }
-                    // })
+                    //判断两种情况拖入文件全都重名或部分重名
+                    if(n === allLength && allLength !==0){
+                        $('#move_window>.att').text('文件名重复了，请重新选择');
+                        $('#move_window>.att').fadeIn(300,function (){
+                                    setTimeout(function (){
+                                        $('#move_window>.att').fadeOut(300);
+                                    },500)
+                                });      
+                        return;            
+                    }else if(n !== 0){
+                        $('#bullet').text('有重名文件,部分移动失败').css('background','#f3a960');
+                        showBul();
+                    }else{
+                        $('#bullet').text('移动成功').css('background','#86ce8b');
+                        showBul();
+                    }
+                    $(thisArr).each(function (index,item){
+                        for(var i = 0;i < data.length;i++){
+                            if($(item).attr('cus_id') == data[i].id){
+                                data[i].pid = id;
+                                break;
+                            }
+                        }
+                    })
                     //重新生成三个结构
                     $('#content .list').html(createTreeHTML(init));
                     $('#content .list h3[cus_id="'+ thisId +'"]').css('color','#55addc');
@@ -617,7 +637,6 @@
                     $('nav > .checked').removeClass('checked');
                     //重置id
                     id = -999;
-                    
                 }
             }else{
                 $('#move_window>.att').text('请选择想要移动的文件夹');

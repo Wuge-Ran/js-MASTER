@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    textarea{
+        width: 400px;
+        height: 300px;
+        font-size:24px;
+    }
+    </style>
+</head>
+<body>
+    <!-- <textarea>唐三中文网免费提供唐家三少最新最热的小说在线免费阅读和最全的唐家三少作品集下载</textarea>
+    <button>转换</button>
+    <textarea></textarea> -->
+    <script>
+        // var btn = document.querySelector('button');
+        // var tArea = document.querySelectorAll('textarea');
+        // btn.onclick = function (){
+        //     var val = tArea[0].value;
+        //     var re = /唐家三少|唐三/g;
+        //     tArea[1].value = val.replace(re,function (str){
+        //         var star = '';
+        //         for(var i = 0;i < str.length;i++){
+        //             star += '*';
+        //         }
+        //         return star;
+        //     })
+             
+        // }
+        var str = '1994-01-10';
+        var re = /-/g;
+        str = str.replace(re,'.');
+        console.log(str);
+    </script>
+</body>
+</html>
