@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <p></p>
+<script>
+    var input = document.querySelector('input');
+    input.oninput = function (){
+        var re = /^[1-9]\d{4,11}$/;
+        var str = input.value;
+        if(str.test(re)){
+
+        }else{
+
+        }
+    }
+</script>    
+</body>
+</html>

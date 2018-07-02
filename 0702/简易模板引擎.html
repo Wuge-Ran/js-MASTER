@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+     function render(html,data){
+         var re = /\{\{(\w+)\}\}/g;
+         html = html.replace(re,function ($0,$1){
+             return data[$1];
+         })
+         return html;
+    }
+    var data = {
+				name: 'leo',
+				age: 30,
+				height: 180
+		}
+    html = `
+				<ul>
+					<li>姓名：{{name}}</li>
+					<li>年龄：{{age}}</li>
+					<li>身高：{{height}}</li>
+				</ul>
+			`;
+    document.body.innerHTML = render(html,data);         
+</script>
+</body>
+</html>

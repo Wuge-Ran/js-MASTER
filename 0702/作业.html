@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+		<script>
+			/*
+				邮箱的规则
+					123@miaov.com
+					123@miaov.com.cn
+					123@miaov.com.cn.net
+					
+					1. 开始只能是数字 字母 下划线组成 至少有1位，最多是12位
+					2. 跟上 @
+					3. 域名 数字 字母 组成 位数是在1-10位的
+					4 后缀 . 后只能是字母 至少2位 最多是5位
+					5. 后缀出现一组到3组
+
+
+			*/
+		</script>
+	</head>
+
+	<body>
+        <input type="text">
+        <p></p>
+        <script>
+            var input = document.querySelector('input');
+            var p = document.querySelector('p');
+            input.oninput = function (){
+                var str = input.value;
+                var re = /^\w{1,12}@[0-9a-z]{1,10}(?:\.[a-z]{2,5}){1,3}$/;
+                if(re.test(str)){
+                    p.innerText = '是邮箱';
+                }else{
+                    p.innerText = '不是邮箱';
+                }
+            }
+        </script>
+	</body>
+</html>
