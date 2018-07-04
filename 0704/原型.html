@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>原型</title>
+</head>
+<body>
+    <script>
+        function CreateMan(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        var Man1 = new CreateMan('leo',19);
+        var Man2 = new CreateMan('momo',22);
+        CreateMan.prototype.eat = function (){
+            console.log(this);
+        }
+        Man1.eat();
+        console.log(Man1.eat === Man2.eat);
+
+    </script>
+</body>
+</html>
