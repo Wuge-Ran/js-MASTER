@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>深拷贝</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            a:1,
+            b:[1,2,3,4],
+            c:3,
+            d:{
+                f:[1,2,3],
+                g:{
+                    h:999
+                }
+            },
+            z:[1,[2,3,4],10]
+        }
+        console.log(null);
+        function deepCopy(obj){
+            var newObj;
+            if( newObj instanceof Array ){
+                newObj = [];
+                var n = obj.length;
+                while(n--){
+                    newObj[n] =  deepCopy(obj[n]);
+                }
+                return newObj;
+            }else if( newObj instanceof Object){
+                newObj = {};
+                for(var key in obj){
+                    newObj[key] = deepCopy(obj[key]);
+                }
+                return newObj;
+            }
+            return obj;
+        }
+        var newOne = deepCopy(obj);
+        console.log(newOne);
+    </script>
+</body>
+</html>
