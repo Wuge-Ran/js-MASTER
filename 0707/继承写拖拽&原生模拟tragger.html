@@ -5,8 +5,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+        }
+        #box2{
+            top:200px;
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="box1">div1</div>
+    <div id="box2">div2</div>
+    <script>
+        function Booking(){
+            this.books = {};
+        }
+        Booking.prototype ={
+             constructor:Booking,
+             on:function (evName,fn){
+                 if(!this.books.hasOwnProperty(evName)){
+                    this.books[evName] = [];
+                 }
+                 this.books[evName].push(fn);
+             },
+             tragger:function (evName){
+                 var fns = this.books[evName];
+                 var arr = Array.prototype.slice.call(arguments,1);
+                 for(var i = 0;i < fns.length;i++){
+                     fns[i].apply(null,arr);
+                 }
+             },
+             off:function (evName,fn){
+                 if(!this.books[evName]){
+                     return;
+                 }
+                 var fns = this.books[evName];
+                 for(var i = 0;i < fns.length;i++){
+                    if(fns[i] === fn){
+                        fns.splice(i,1)
+                    }
+                 }
+             }
+        }
+        function Drap(selector){
+            Booking.call(this);
+            this.div = document.querySelector(selector);
+            this.init();
+        }
+        Drap.prototype = Object.create(Booking.prototype);
+        var obj = {
+            constructor:Drap,
+            init:function (){
+                this.div.addEventListener('mousedown',this.mDown.bind(this));
+            },
+            mDown:function (ev){
+                this.disX = ev.clientX - this.div.offsetLeft;
+                this.disY = ev.clientY - this.div.offsetTop;
+                this.move = this.mMove.bind(this);
+                this.up = this.mUp.bind(this);
+                document.addEventListener('mousemove',this.move);
+                document.addEventListener('mouseup',this.up);
+            },
+            mMove:function (ev){
+                this.div.style.top = ev.clientY - this.disY + 'px';
+                this.div.style.left = ev.clientX - this.disX + 'px';
+                console.log(this.div.style.top,this.div.style.left)
+                this.tragger('move',this.div.style.top,this.div.style.left);
+            },
+            mUp:function (){
+                document.removeEventListener('mousemove',this.move);
+				document.removeEventListener('mouseup',this.up);
+            }
+        }
+        for(var key in obj){
+            if(obj.hasOwnProperty(key)){
+                Drap.prototype[key] = obj[key];
+            }
+        }
+        var b1 = new Drap('#box1');
+        b1.on('move',function (x,y){
+            console.log('可以',x,y)
+        });
+        b1.on('move',function (x,y){
+            console.log('可以')
+        });
+        var b2 = new Drap('#box2');
+    </script>
 </body>
 </html>
