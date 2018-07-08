@@ -7,6 +7,28 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <script>
+        function Father(name,height){
+            this.name = name;
+            this.height = height
+        }
+        Father.prototype.speak = function (){
+            console.log('我是'+this.name);
+        }
+        function Son(name,height,money){
+            Father.call(this,name,height);
+            this.money = money;
+        }
+        Son.prototype = Object.create(Father.prototype);
+        Son.prototype.constructor = Son;
+        function create(obj){
+            function fn(){};
+            fn.prototype = obj;
+            return new fn();
+        }
+        var son = new Son('gege',180,'15k');
+        son.speak();
+        console.log(son);
+    </script>
 </body>
 </html>
