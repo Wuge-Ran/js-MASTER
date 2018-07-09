@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>es6拖拽</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: greenyellow;
+            position: absolute;
+        }
+        #box2{
+            top:500px;
+        }
+    </style>  
+</head>
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <script>
+        class Drag{
+            constructor(id){
+                this.dragEle = document.querySelector(id);
+                this.init();
+            }
+            init(){
+                this.dragEle.onmousedown = this.down.bind(this);
+            }
+            down(ev){
+                this.disX = ev.clientX - this.dragEle.offsetLeft;
+                this.disY = ev.clientY - this.dragEle.offsetTop;
+                document.onmousemove = this.move.bind(this);
+                document.onmouseup = this.up.bind(this);
+                ev.preventDefault();
+            }
+            move(ev){
+                this.dragEle.style.top = ev.clientY - this.disY +'px';
+                this.dragEle.style.left = ev.clientX - this.disX +'px';
+            }
+            up(){
+                document.onmousemove = document.onmouseup = null;
+            }
+        }
+        class box extends Drag{
+            move(ev){
+                super.move(ev);
+                console.log(1);
+            }
+        }
+        var box1 = new box('#box1');
+        var box2 = new Drag('#box2');
+    </script>
+</body>
+</html>
