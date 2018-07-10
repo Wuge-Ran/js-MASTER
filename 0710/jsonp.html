@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-3.3.1.js"></script>
+</head>
+<body>
+    <input type="text">
+    <ul id="list"></ul>
+    <script>
+        $('input').on('input',function (){
+            var val = $('input').val().trim();
+            if(!val) return;
+            $.getJSON(`http://searchtip.kugou.com/getSearchTip?format=jsonp&keyword=${val}&callback=?`,
+                function (data){
+                    console.log(data);
+                    var d = data.data[0].RecordDatas;
+                    if(!d.length) return;
+                    var html = '';
+                    for(var i = 0;i < d.length;i++){
+                        html += `<li>${d[i].HintInfo}</li>`;
+                    }
+                    $('#list').html(html);
+                }                
+        )
+        })
+        $('#list').on('click','li',function (){
+            var val = $(this).text().trim();
+            $.getJSON(`http://so.service.kugou.com/get/complex?format=jsonp&word=${val}&callback=?`,
+                function (data){
+                    console.log(data);
+                }
+            )
+        })
+    </script>
+</body>
+</html>
