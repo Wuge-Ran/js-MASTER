@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-3.3.1.js"></script>
+    <script src="jquery.qrcode.js"></script>
+    <script src="./qrcode.js"></script>
+    <style>
+        img{
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            left: 100px;
+            top:100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="qrcode">
+        <img src="./timg.jpg" alt="">
+    </div>
+    <script>
+        $('#qrcode').qrcode({
+            render		: "canvas",//渲染方式 canvas/table
+            text :'https://www.baidu.com/',//设置二维码内容
+			width		: 256,//宽度
+			height		: 256,//高度
+			typeNumber	: -1,//计算模式
+			correctLevel	: QRErrorCorrectLevel.H,
+            background      : "#ffffff",
+            foreground      : "red"
+        }); 
+           
+    </script>
+</body>
+</html>
