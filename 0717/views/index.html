@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>首页</p>
+    <a href="/ME">关于我</a>
+    <button>获得数据</button>
+    <script src="/click.js"></script>
+    <script src="/jquery-3.3.1.js"></script>
+    <script>
+        $('button').click(function(){
+            $.ajax({
+                url:'http://localhost:4001/users',
+                success(data){
+                    if(data.code === 0){
+                        console.log(data)
+                    }else{
+                        console.log(data)
+                    }
+                },
+                error(e){
+                    console.log(e);
+                }
+            })
+        })
+    </script>
+</body>
+</html>
