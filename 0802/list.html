@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .yellow{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <!-- <div>
+            <div>1</div>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+        <div>
+            <div>1</div>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div>
+        <div>
+            <div>1</div>
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+            </ul>
+        </div> -->
+        <div v-for='item,index in arr' >
+            <div @click="changeShow($event,index)" 
+            :class="{yellow:item.display}"
+            @mouseDown="cancelDown">{{item.title}}</div>
+            <ul :style = "{display:item.display?'block':'none'}">
+                <li v-for='i in item.lis' 
+                :class="{yellow:i.check}">{{i.name}}</li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let data = {
+            arr:[{
+                title:'我的好友',
+                lis:[{
+                    name:'123',
+                },{
+                    name:'456',
+                },{
+                    name:'789',
+                }],
+                display:true
+            },{
+                title:'企业好友',
+                lis:[{
+                    name:'123',
+                },{
+                    name:'456',
+                },{
+                    name:'789',
+                }],
+                display:true
+            },{
+                title:'heimin',
+                lis:[{
+                    name:'123',
+                },{
+                    name:'456',
+                },{
+                    name:'789',
+                }],
+                display:true
+            }]
+        }
+        new Vue({
+            el:'#box',
+            data,
+            methods:{
+                changeShow(ev,i){
+                    this.arr[i].display = !this.arr[i].display;
+                    ev.preventDefault();
+                },
+                cancelDown(ev){
+                    console.log(ev)
+                    ev.preventDefault();
+                }
+            }
+        })
+    </script>
+</body>
+</html>

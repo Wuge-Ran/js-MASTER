@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">{{message}}
+        <ul>
+            <li v-for= 'v in arr' >{{v}}</li>
+        </ul>
+        <button v-on:click='changeShow'>按钮</button>
+        <div v-show = 'show'>1</div>
+        <div v-show = 'show'>2</div>
+        <div v-show = 'show'>3</div>
+        <div v-show = 'show'>4</div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js">
+    </script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                message:'vue message!',
+                arr:[1,2,3,4,5],
+                show:true
+            },
+            methods:{
+                changeShow(){
+                    this.show = !this.show;
+                }
+            }
+        })    
+    </script>
+</body>
+</html>
