@@ -76,9 +76,8 @@ var vm = new Vue({
         // 编辑
         editTodo(id,index){  // 一个是id，一个是index
             this.editId = id;
-            this.$nextTick(()=>{
-                this.$refs.miaov[index].focus()
-            })
+            console.log(this.$refs.miaov[index])
+            this.$refs.miaov[index].focus()
 
             let item = this.list.find(item => item.id === id);
 
@@ -129,7 +128,7 @@ var vm = new Vue({
             // 改变根实例的数据
             this.hash = hash;
 
-            console.log(hash);
+            console.log(this.hash);
         }
         
         window.addEventListener('hashchange',changehash)
