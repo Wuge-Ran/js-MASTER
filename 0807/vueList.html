@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+		<style>
+			
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<input-cp @add-li-through-f="addLi"></input-cp>
+			<list :data="data" @dele-order = 'deleThroughF'></list>
+			<!-- <div class="header">
+				<input type="" name="">
+			</div>
+			<ul>
+				<li>
+					<span>leo</span>
+					<button>删除</button>
+				</li>
+			</ul> -->
+		</div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            let data = [
+                {
+					id:1,
+                    title:'leo'
+                },{
+					id:2,
+                    title:'momo'
+                }
+            ]
+            
+            Vue.component('input-cp',{
+				data:function (){
+					return {
+						val:''
+					}
+				},
+                template:`<input v-model='val' @keydown.13='addLi' />`,
+				methods: {
+					addLi(){
+						this.$emit('add-li-through-f',this.val);
+						this.val = '';
+					}
+				} 
+            })
+            Vue.component('list',{
+				props: {
+					data:{
+						type:Array,
+						default(){
+							return [];
+						}
+					}
+				},
+                data:function (){
+					return {
+						val:''
+					}
+				},
+                template:`<ul>
+							<list-li :list="item" v-for='item in data' @dele-order = 'deleThroughF'></list-li>
+						</ul>`,
+				methods:{
+					deleThroughF(id){
+						this.$emit('dele-order',id);
+					}
+				}		
+            })
+			Vue.component('list-li',{
+				props: {
+					list:{
+						type:Object,
+						default(){
+							return {};
+						}
+					}
+				},
+                methods:{
+					deleThroughF(){
+						this.$emit('dele-order',this.list.id);
+					}
+				},
+                template:`<li>
+							<span>{{list.title}}</span>
+							<button @click='deleThroughF'>删除</button>
+						</li>`
+            })
+
+
+			new Vue({
+                el:'#app',
+                data:{
+                    data
+                },
+				methods: {
+					addLi(val){
+						console.log(123)
+						this.data.push({
+							id:Date.now(),
+							title:val
+						})
+					},
+					deleThroughF(id){
+						this.data = this.data.filter( (item)=>{
+							return item.id !== id;
+						} )
+					}
+				}
+            })
+        </script>
+	</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root">
+        <news :title="title" :list = "list" @get-data = 'changeTitle'/>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        
+        Vue.component('news',{
+            props:{
+                title:{
+                    type:String,
+                    default:'默认值'
+                },
+                list:{
+                    type:Array,
+                    default(){
+                        return [];
+                    }
+                }
+            },
+            template:`<div>
+                        <h2 >{{title}}</h2>
+                        <inner-con @get-data = 'getDataFromSon'></inner-con>
+                        <ul>
+                            <li v-for='item in list'>{{item}}</li>
+                        </ul>
+                    </div>`,
+            components:{
+                innerCon:{
+                    template:`<button @click = 'propData'>按钮</button>`,
+                    methods:{
+                        propData(){
+                            this.$emit('get-data','ggg')
+                        }
+                    }
+                },
+                
+            },
+            methods:{
+                    getDataFromSon(v){
+                        this.$emit('get-data',v)
+                    }
+                }
+        })
+        new Vue({
+            el:'#root',
+            data:{
+                title:'新闻',
+                list:[1,23,4,5]
+            },
+            methods:{
+                changeTitle(v){
+                   this.title = v;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
