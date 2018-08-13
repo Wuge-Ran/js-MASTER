@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+   function Observer(obj){
+       Object.keys(obj).forEach( key =>{
+            defineReactive(obj,key,obj[key])
+       } )
+   }
+
+   function defineReactive(obj,key,val){
+       Object.defineProperty(obj,key,{
+           set(newVal){
+            val = newVal;
+            console.log(data)
+            render();
+           },
+           get(){
+               return val
+           }
+       })
+   }
+</script>
+<body>
+    <div id='app'></div>
+    <script>
+        let data = {
+            text1:1111,
+            text2:2222
+        }
+        Observer(data)
+        let oDiv = document.querySelector('#app');
+        function render(){
+            oDiv.innerHTML = `<p>${data.text1}</p>`
+        }
+        render();
+        document.onclick = function (){
+            data.text1 = 9999;
+        }
+    </script>
+</body>
+</html>
