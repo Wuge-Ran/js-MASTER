@@ -1,0 +1,14 @@
+#app .vux-header-title img {
+  width: 46px;
+  height: 44px;
+}
+#app .vux-header-title .vux-x-icon-ios-search-strong {
+  float: right;
+}
+#app .vux-header .vux-x-icon {
+  fill: #fff;
+}
+#app .vux-header-right {
+  top: 9px;
+  color: white;
+}
