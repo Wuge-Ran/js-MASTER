@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class EmitMode{
+            constructor(){
+                this.events = {}
+            }
+            on(eventName,fn){
+                if( !Array.isArray(this.events[eventName]) ){
+                    this.events[eventName] = [];
+                }
+                this.events[eventName].push(fn)
+            }
+            emit(eventName,...args){
+                if(Array.isArray(this.events[eventName])){
+                    let arr = this.events[eventName];
+                    for(let i = 0;i < arr.length; i++){
+                        arr[i](...args);
+                    }
+                }
+            }
+        }
+        let c = new EmitMode();
+        c.on('abc',function (...arg){
+            console.log(...arg)
+        })
+        document.onclick = function (){
+            c.emit('abc',9999,'qwd')
+        }
+    </script>
+</body>
+</html>
