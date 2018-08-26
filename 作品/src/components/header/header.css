@@ -1,0 +1,27 @@
+#app {
+  padding-top: 2.5rem;
+  padding-bottom: 2.77777778rem;
+}
+#app .vux-header-title img {
+  width: 2.55555556rem;
+  height: 2.44444444rem;
+}
+#app .vux-header-title .vux-x-icon-ios-search-strong {
+  float: right;
+}
+#app .vux-header .vux-header-title {
+  height: 2.22222222rem;
+}
+#app .vux-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+}
+#app .vux-header .vux-x-icon {
+  fill: #fff;
+}
+#app .vux-header-right {
+  top: 9px;
+  color: white;
+}

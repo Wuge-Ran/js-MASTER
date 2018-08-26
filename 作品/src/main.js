@@ -2,12 +2,16 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import iview from 'iview'
-import 'iview/dist/styles/iview.css';
 import router from '@/router'
+import server from '@/server'
+import lazy from 'vue-lazyload'
 
 Vue.config.productionTip = false
-Vue.use(iview)
+Vue.use(server)
+//引入懒加载
+Vue.use(lazy,{
+  loading:require('@/assets/img/loading.gif')
+})
 
 /* eslint-disable no-new */
 new Vue({

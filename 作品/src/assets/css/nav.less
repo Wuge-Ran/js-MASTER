@@ -1,0 +1,39 @@
+@r:18rem;
+//下拉动画
+.drop-leave-active,.drop-enter-active{
+    transition:  all .6s ease; 
+    height: 100%;
+}
+.drop-leave-active,.drop-enter{
+    margin-top:-640/@r !important;
+}
+.drop-leave,.drop-enter-active{
+    margin-top: 0px;
+}
+//下拉列表
+#top_nav{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #527294;
+    z-index: 2;
+    li{
+        width: 89/@r;
+        height:71/@r;
+        float: left;
+        display: inline;
+        box-sizing:border-box;
+        color: #e6e6e6;
+        text-align: center;
+        font-size: 12px;
+        padding-top:40/@r; 
+        &:nth-child(1){
+            background: url(../img/nav/mall.png) no-repeat center 10/@r;
+            background-size: 30%;
+        }
+        &:nth-child(2){
+            background: url(../img/nav/phone.png) no-repeat center 10/@r;
+            background-size: 30%;
+        }
+    }
+}

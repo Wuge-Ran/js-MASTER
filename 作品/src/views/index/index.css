@@ -1,0 +1,132 @@
+.vux-slider {
+  width: 96%;
+  margin: 0.55555556rem auto;
+  margin-bottom: 1.11111111rem;
+}
+.vux-slider img {
+  width: 100%;
+  height: 100%;
+}
+#index {
+  position: relative;
+  height: 100%;
+}
+#index .innner_nav {
+  display: flex;
+  padding: 0 0.55555556rem;
+}
+#index .innner_nav li img {
+  display: block;
+  width: 40%;
+  margin: 0 auto;
+}
+#index .innner_nav li p {
+  font-size: 0.66666667rem;
+  text-align: center;
+  margin: 0.27777778rem 0 0.55555556rem 0;
+}
+#header {
+  border-bottom: 0.33333333rem solid #e2e2e2;
+  overflow: hidden;
+}
+#hot {
+  border-bottom: 0.33333333rem solid #e2e2e2;
+}
+#hot .box1 {
+  height: 12.22222222rem;
+  position: relative;
+  width: 61.66666667rem;
+  border-bottom: 0.33333333rem solid #e2e2e2;
+}
+#hot .box1-item {
+  display: inline-block;
+  margin-left: 0.83333333rem;
+  margin-top: 0.55555556rem;
+  width: 6.66666667rem;
+  float: left;
+  text-align: center;
+  line-height: 100px;
+}
+#hot .box1-item h4 {
+  font: bold 14px/24px '幼圆';
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#hot .box1-item p {
+  font: 12px/18px '幼圆';
+  color: #7f7f7f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#hot .box1-item div {
+  font: 12px/18px '幼圆';
+  color: #d44d44;
+}
+#hot img {
+  width: 6.66666667rem;
+  height: 6.66666667rem;
+  border: 1px solid rgba(226, 226, 226, 0.5);
+  border-radius: 8px;
+}
+#focus {
+  height: 15.22222222rem;
+  padding: 0.77777778rem 0.66666667rem;
+}
+#focus img {
+  width: 100%;
+  height: 100%;
+}
+#focus .sele-1 {
+  width: 9.11111111rem;
+  padding-right: 0.44444444rem;
+}
+#focus .sele-1 div {
+  margin-bottom: 0.44444444rem;
+  height: 4.77777778rem;
+}
+#focus .sele-2 {
+  width: 9.11111111rem;
+  height: 15.22222222rem;
+}
+#new {
+  border-bottom: 0.33333333rem solid #e2e2e2;
+}
+#new .newList {
+  padding: 1rem 0.66666667rem;
+}
+#new .newList li {
+  width: 9.11111111rem;
+  margin-bottom: 0.83333333rem;
+  float: left;
+}
+#new .newList li:nth-child(odd) {
+  margin-right: 0.22222222rem;
+}
+#new .newList li:nth-child(even) {
+  margin-left: 0.22222222rem;
+}
+#new .newList li img {
+  width: 9rem;
+  height: 9rem;
+  border: 1px solid rgba(226, 226, 226, 0.5);
+  border-radius: 8px;
+}
+#new .newList li h4 {
+  font: bold 14px/24px '幼圆';
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#new .newList li p {
+  font: 12px/18px '幼圆';
+  color: #7f7f7f;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#new .newList li div {
+  font: 12px/18px '幼圆';
+  color: #d44d44;
+}
