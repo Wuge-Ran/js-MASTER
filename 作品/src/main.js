@@ -5,6 +5,7 @@ import App from './App'
 import router from '@/router'
 import server from '@/server'
 import lazy from 'vue-lazyload'
+import store from '@/vuex'
 
 Vue.config.productionTip = false
 Vue.use(server)
@@ -18,5 +19,6 @@ new Vue({
   el: '#app',
   components: { App },
   template: '<App/>',
-  router
+  router,
+  store
 })

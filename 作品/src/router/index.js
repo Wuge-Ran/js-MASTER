@@ -2,19 +2,27 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Index from '@/views/Index';
 let Introduce = () => import( /* webpackChunkName: "intro" */'@/views/intr/introduce');
-
+let IntroNav = () => import( /* webpackChunkName: "intro" */'@/components/header/intro_nav');
+let Buy = () => import('@/components/buy/Buy');
 Vue.use(VueRouter);
 
 let router = new VueRouter({
     mode:'history',
     routes:[{
-        path:'/',
+        path:'/index',
         name:'Index',
         component:Index
     },{
-        path:'/intro',
+        path:'/intro/:id/:index?',
         name:'Intro',
-        component:Introduce
+        components:{
+            nav:IntroNav,
+            default:Introduce
+        }
+    },{
+        path:'/buy/:id',
+        name:'Buy',
+        component:Buy
     },{
         //重定向保护
         path:'*',

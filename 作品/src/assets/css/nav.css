@@ -5,7 +5,7 @@
 }
 .drop-leave-active,
 .drop-enter {
-  margin-top: -35.55555556rem !important;
+  margin-top: -100vh !important;
 }
 .drop-leave,
 .drop-enter-active {

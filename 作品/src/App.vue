@@ -1,15 +1,16 @@
 <template>
   <div id="app">
-    <xh-header @isNavshow='changeShow'></xh-header>
+    <xh-header @isNavshow='changeShow' ></xh-header>
     <transition name="drop">
       <ul id='top_nav' v-show='navShow'>
           <router-link tag="li" :to="{name:'Index'}" @click.native="toLi">科技商城</router-link>
-          <router-link tag="li" :to="{name:'Intro'}" @click.native="toLi">手机</router-link>
+          <router-link tag="li" :to="{name:'Intro',params:{id:'100051701'}}" @click.native="toLi">手机</router-link>
       </ul>
     </transition>
+    <router-view name='nav'></router-view>
     <router-view></router-view>
     <div id="footer">
-      <xhFooter />
+      <xhFooter v-if='footerShow'/>
     </div> 
   </div>
 </template>
@@ -22,18 +23,32 @@ export default {
   name: 'App',
   data(){
     return{
-      navShow:false
+      navShow:false,
+      footerShow:true
+    }
+  },
+  watch: {
+    '$route':{
+      //根据路由对象改变icon
+        handler(to,from){
+         switch(to.name){
+           case 'Buy':
+              this.footerShow = false;
+              break;   
+           default:
+              this.footerShow = true;
+         }
+        }
     }
   },
   components: {
     xhHeader,
     xhFooter
   },
-
   methods: {
     //得到子组件的通知，下拉菜单
     changeShow(){
-      this.navShow = !this.navShow
+      this.navShow = !this.navShow;
     },
     toLi(){
       this.navShow = false;

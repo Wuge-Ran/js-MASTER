@@ -110,7 +110,6 @@ export default {
       this.focusList1 = data.floors[1].dataList.slice(0,3);
       this.focusList2 = data.floors[1].dataList.slice(3)[0].src;
       this.newListId = data.floors[2].dataList;
-      console.log(this.newList)
     })
     //获取热门商品数据
     this.$api.getProducts(this.hotListId).then(({data})=>{
@@ -119,7 +118,6 @@ export default {
     //获取新品数据
     this.$api.getProducts(this.newListId).then(({data})=>{
       this.newList = data.data.list;
-      console.log(this.newList)
     })
   }
 }
