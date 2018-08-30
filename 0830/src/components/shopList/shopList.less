@@ -1,0 +1,72 @@
+@r:18rem;
+
+#shoplist{
+    h3{
+        font-size: 16/@r; 
+        line-height: 40/@r;
+        color: #666;
+        text-indent: 15/@r;
+        border-bottom:1px solid #e2e2e2
+    }
+    img{
+        width: 100%;
+    }
+    .shoplist{
+        &>li{
+            width: 336/@r;
+            height: 120/@r;
+            padding: 12/@r;
+            border-bottom:1px solid #e2e2e2;
+            &>div{
+                width: 175/@r;
+            }
+            img{
+                width: 120/@r;
+                height: 120/@r;
+            }
+            h4{
+                font-size: 14/@r; 
+                line-height: 30/@r;
+                overflow: hidden;
+                white-space:nowrap;
+                text-overflow:ellipsis;  
+            }
+            .intro{
+                font-size: 12/@r; 
+                line-height: 20/@r;
+                color: #7f7f7f;
+            }
+            .specList{
+                margin-bottom: 5/@r;
+                li{
+                    font-size: 8/@r; 
+                    line-height: 12/@r;
+                    border:1px solid #94b3f7;
+                    border-radius:4/@r; 
+                    margin: 0 2/@r 2/@r;
+                    padding: 0 3/@r;
+                    color: #3965cc;
+                }
+            }
+            .colorList{
+                li{
+                    overflow: hidden;
+                    width: 10/@r;
+                    height: 10/@r;
+                    margin: 0 2/@r;
+                    border-radius:50%; 
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+            .price{
+                color: #d44d44;
+                font-size: 12/@r; 
+                line-height: 20/@r;
+            }
+        }
+    }
+    
+}
