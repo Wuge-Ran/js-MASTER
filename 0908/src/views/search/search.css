@@ -1,0 +1,38 @@
+#search h4 {
+  color: #8e8e8e;
+  font-size: 0.88888889rem;
+  line-height: 3.33333333rem;
+  text-indent: 0.83333333rem;
+}
+#search .hotList {
+  padding: 0 0.83333333rem;
+  overflow: hidden;
+}
+#search .hotList li {
+  padding: 0 0.27777778rem;
+  float: left;
+  margin: 0.27777778rem;
+  font-size: 0.66666667rem;
+  line-height: 1rem;
+  border-radius: 1rem;
+}
+#search .hotList li:nth-child(3n) {
+  color: #cd3f36;
+  background-color: #ffe7e5;
+  border: 1px solid #f1948c;
+}
+#search .hotList li:nth-child(3n-1) {
+  color: #3bc9e6;
+  background-color: #edfcfc;
+  border: 1px solid #84d9ed;
+}
+#search .hotList li:nth-child(3n-2) {
+  color: #e78612;
+  background-color: #fff7e4;
+  border: 1px solid #ffca6d;
+}
+#search .suggestList li {
+  text-indent: 0.83333333rem;
+  font-size: 0.77777778rem;
+  line-height: 2.22222222rem;
+}

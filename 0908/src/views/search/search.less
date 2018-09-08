@@ -1,0 +1,43 @@
+@r:18rem;
+#search{
+    h4{
+        color: #8e8e8e;
+        font-size:16/@r;
+        line-height: 60/@r;
+        text-indent: 15/@r;
+    }
+    .hotList{
+        padding: 0 15/@r;
+        overflow: hidden;
+        li{
+            padding: 0 5/@r;
+            float: left;
+            margin: 5/@r;
+            font-size:12/@r;
+            line-height: 18/@r;
+            border-radius: 18/@r;
+            &:nth-child(3n){
+                color: #cd3f36;
+                background-color: #ffe7e5;
+                border: 1px solid #f1948c;
+            }
+            &:nth-child(3n-1){
+                color: #3bc9e6;
+                background-color: #edfcfc;
+                border: 1px solid #84d9ed;
+            }
+            &:nth-child(3n-2){
+                color: #e78612;
+                background-color: #fff7e4;
+                border: 1px solid #ffca6d;
+            }
+        }
+    }
+    .suggestList{
+        li{
+            text-indent: 15/@r;
+            font-size:14/@r;
+            line-height: 40/@r;
+        }
+    }
+}
