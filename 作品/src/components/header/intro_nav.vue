@@ -5,12 +5,10 @@
     </nav>
 </template>
 
-<style scope>
+<style scoped>
     nav{
         height: 2rem;
         background: black;
-        position: fixed;
-        width: 100%;
     }
     nav div{
         float: left;

@@ -7,21 +7,30 @@
         </swiper-item>
       </swiper>
       <ul class='innner_nav'>
-        <li v-for="(item,index) in navList" :key="index">
+        <router-link 
+          v-for="item in navList" 
+          :key="item.id"
+          tag="li"
+          :to="{name:'ShopList',params:{index:item.id}}"
+          >
           <img :src="item.src" />
           <p>{{item.name}}</p>
-        </li>
+        </router-link>
       </ul> 
   </div>
   <div id="hot">
     <group>
-      <cell-box is-link>
+      <cell-box :link="{name:'ShopList',params:{index:'0'}}">
         热销商品
       </cell-box>
     </group>
     <Scroller lock-y scrollbar-x :bounce=false>
       <div class="box1">
-        <div class="box1-item" v-for="item in this.hotList" :key="item.id">
+        <div class="box1-item"
+         v-for="item in this.hotList" 
+         :key="item.id"
+         @click="enter(item.spu_id)"
+         >
           <img v-lazy="item.shop_info.ali_image" />
           <h4>{{item.product_info.product_name}}</h4>
           <p>{{item.shop_info.sub_title}}</p>
@@ -40,12 +49,12 @@
   </div>
   <div id="new">
     <group>
-      <cell-box is-link>
+      <cell-box link='/shopList/1'>
         新品首发
       </cell-box>
     </group>
     <ul class="newList clearfix">
-      <li v-for='item in newList' :key='item.id'>
+      <li v-for='item in newList' :key='item.id' @click="enter(item.spu_id)">
         <img v-lazy="item.shop_info.ali_image" />
         <h4>{{item.product_info.product_name}}</h4>
         <p>{{item.shop_info.sub_title}}</p>
@@ -77,19 +86,24 @@ export default {
       banner:[],
       navList:[{
         name:'手机',
-        src:require('@/assets/img/phone.png')
+        src:require('@/assets/img/phone.png'),
+        id:'64'
       },{
         name:'空气净化器',
-        src:require('@/assets/img/airRefresh.png')
+        src:require('@/assets/img/airRefresh.png'),
+        id:'77'
       },{
         name:'官方配件',
-        src:require('@/assets/img/icons.png')
+        src:require('@/assets/img/icons.png'),
+        id:'60'
       },{
         name:'品牌周边',
-        src:require('@/assets/img/clothes.png')
+        src:require('@/assets/img/clothes.png'),
+        id:'69'
       },{
         name:'好物优选',
-        src:require('@/assets/img/great.png')
+        src:require('@/assets/img/great.png'),
+        id:'61'
       }
       ],
       hotListId:[],
@@ -98,6 +112,11 @@ export default {
       focusList2:[],
       newListId:[],
       newList:[]
+    }
+  },
+  methods: {
+    enter(id){
+      this.$router.history.push({name:'Buy',params:{id}})
     }
   },
   //等到hotListId更新以后再往下走
@@ -117,6 +136,7 @@ export default {
     })
     //获取新品数据
     this.$api.getProducts(this.newListId).then(({data})=>{
+      console.log(data)
       this.newList = data.data.list;
     })
   }

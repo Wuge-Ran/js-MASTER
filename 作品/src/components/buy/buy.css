@@ -1,0 +1,50 @@
+#buyBox {
+  padding-top: 2.44444444rem;
+}
+#buyBox .showImg {
+  height: 16rem;
+  border-bottom: 0.33333333rem solid #e2e2e2;
+}
+#buyBox .showImg img {
+  display: block;
+  margin: 0 auto;
+  height: 100%;
+}
+#buyBox img {
+  width: 100%;
+}
+#buyBox h3 {
+  color: #666;
+  font-size: 0.77777778rem;
+  line-height: 2.22222222rem;
+  text-indent: 0.55555556rem;
+}
+#buyBox .list {
+  padding: 1.11111111rem;
+}
+#buyBox .list li h4,
+#buyBox .list li span {
+  font-size: 0.66666667rem;
+  line-height: 3.33333333rem;
+}
+#buyBox .list li span {
+  color: #7f7f7f;
+}
+#buyBox .intro {
+  padding: 0 0.88888889rem 0.88888889rem;
+}
+#buyBox .intro h4 {
+  font-size: 0.88888889rem;
+  line-height: 2.22222222rem;
+}
+#buyBox .intro p {
+  line-height: 1.11111111rem;
+  font-size: 0.66666667rem;
+  color: #7f7f7f;
+}
+#buyBox .intro span {
+  display: block;
+  line-height: 1.66666667rem;
+  font-size: 0.77777778rem;
+  color: #d44d44;
+}
