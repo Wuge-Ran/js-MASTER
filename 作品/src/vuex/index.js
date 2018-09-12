@@ -9,11 +9,11 @@ let store = new Vuex.Store({
         scrollObj:'',
         tapVal:'',
         suggest:[],
-        results:[]
+        results:[],
+        carData:[]
     },
     mutations:{
         changeTitle(state,t){
-            console.log('执行了');
             state.title = t;
         },
         newScroll(state,obj){

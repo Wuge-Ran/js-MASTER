@@ -59,9 +59,7 @@ export default {
                 let vm = this;
                 this.$store.state.scrollObj.on('pullingUp',async function (){
                     vm.upLoading = true;
-                    let {data} = await vm.$api.getProductsIntro({category_id:vm.itemId,page:++vm.thisPage});
-                    console.log(data)
-                    let list = data.data.list;
+                    let {data} = await vm.$api.getProductsIntro({category_id:vm.itemId,page:++vm.thisPage});                    let list = data.data.list;
                     if(list.length){
                         vm.list = vm.list.concat(list);
                     }else{

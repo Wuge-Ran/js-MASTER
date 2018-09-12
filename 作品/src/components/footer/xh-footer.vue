@@ -10,7 +10,7 @@
       <img slot="icon-active" src="@/assets/img/footer/classify-active.png">
       <span slot="label">分类</span>
     </tabbar-item>
-    <tabbar-item link="/" badge="3" :selected="index === 2">
+    <tabbar-item link="/shopCar" :badge="badge" :selected="index === 2">
       <img slot="icon" src="@/assets/img/footer/car.png">
       <img slot="icon-active" src="@/assets/img/footer/car-active.png">
       <span slot="label">购物车</span>
@@ -29,22 +29,33 @@ import { Tabbar, TabbarItem } from 'vux'
 export default {
   data(){
     return{
-      index:0
+      index:0,
+      carArr:''
     }
   },
   components: {
     Tabbar,
     TabbarItem
   },
+  computed: {
+    badge(){
+      this.carArr = JSON.parse(window.localStorage.getItem('car')); 
+      if(this.carArr){
+        return ""+this.carArr.length;
+      }else{
+        return "";
+      }
+    },
+  },
   watch:{
     $route:{
       handler(){
-        console.log(this.$route.name)
         if(this.$route.name === "ShopList"||this.$route.name === "Sort"){
           this.index = 1;
+        }else if(this.$route.name === "ShopCar"){
+          this.index = 2;
         }else{
           this.index = 0;
-          console.log('走到这儿了')
         }
       },
       immediate:true

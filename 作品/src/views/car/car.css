@@ -1,0 +1,72 @@
+#shopCar h3 {
+  color: #999999;
+}
+#shopCar .loading {
+  width: 100%;
+}
+#shopCar .noPro img {
+  margin: 5.55555556rem auto 0;
+  display: block;
+  width: 8.33333333rem;
+  height: 8.33333333rem;
+}
+#shopCar .noPro p {
+  text-align: center;
+  line-height: 1.66666667rem;
+}
+#shopCar .noPro button {
+  margin: 0 auto ;
+  display: block;
+}
+#shopCar .list .proName {
+  font-size: 0.66666667rem;
+}
+#shopCar .list .textItem {
+  text-align: center;
+}
+#shopCar .list .jishuan {
+  float: left;
+}
+#shopCar .list .jishuan a,
+#shopCar .list .jishuan input {
+  float: left;
+}
+#shopCar .list .jishuan input {
+  width: 1.66666667rem;
+}
+#shopCar .list .jishuan a {
+  width: 1.22222222rem;
+  height: 1.22222222rem;
+  text-align: center;
+  border: 1px solid #f0f0f0;
+  border-radius: 50%;
+  margin: 0 0.27777778rem;
+}
+#shopCar .list .checkItem {
+  width: 0.83333333rem;
+  height: 0.83333333rem;
+  margin-top: 2.22222222rem;
+}
+#shopCar .list .num {
+  float: left;
+  margin-right: 0.27777778rem;
+}
+#shopCar .list .num b {
+  color: #d44d44;
+  font-size: 0.77777778rem;
+}
+#shopCar .list span {
+  font-size: 0.77777778rem;
+  line-height: 1.33333333rem;
+}
+#shopCar .list li {
+  overflow: hidden;
+}
+#shopCar .list li input {
+  float: left;
+}
+#shopCar .list li img {
+  float: left;
+  width: 5rem;
+  height: 5rem;
+}

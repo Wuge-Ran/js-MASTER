@@ -1,18 +1,45 @@
 <template>
     <div id="buyBtn" class="clearfix">
-        <div id="tag" class="fl"><img src="@/assets/img/buy/shop.png" alt=""><span>1</span></div>
-        <div id="button" class="fl">加入购物车</div>
+        <router-link id="tag" class="fl" to="/shopCar">
+            <img src="@/assets/img/buy/shop.png" alt="">
+            <span v-if="carArr.length">{{carArr.length}}</span>
+        </router-link>
+        <div id="button" class="fl" @click="addToCar">加入购物车</div>
     </div>
 </template>
 <script>
-import { XButton, Flexbox, FlexboxItem } from 'vux'
+import { XButton, Flexbox, FlexboxItem } from 'vux';
 
 export default {
+  data(){
+      return {
+          carArr:[]
+      }
+  },
   components: {
     XButton,
     Flexbox,
     FlexboxItem
   },
+  mounted () {
+     if(window.localStorage.getItem('car')){
+        this.carArr = JSON.parse(window.localStorage.getItem('car')); 
+    }else{
+        this.carArr = [];
+    } 
+  },
+  methods: {
+    addToCar(){
+        if(window.localStorage.getItem('car')){
+            this.carArr = JSON.parse(window.localStorage.getItem('car')); 
+            this.carArr.push(this.$route.params.id);
+            window.localStorage.setItem('car',JSON.stringify(this.carArr));
+        }else{
+            this.carArr.push(this.$route.params.id);
+            window.localStorage.setItem('car',JSON.stringify(this.carArr));
+        }
+    }
+  }
 }
 </script>  
 <style scoped>

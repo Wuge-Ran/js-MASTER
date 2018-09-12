@@ -18,8 +18,8 @@
       </div>
     </div>
     <router-view name="button"></router-view>
-    <div id="footer">
-        <xhFooter v-if='footerShow'/>
+    <div id="footer" v-if='footerShow'>
+        <xhFooter/>
     </div> 
   </div>
 </template>

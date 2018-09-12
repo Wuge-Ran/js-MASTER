@@ -80,7 +80,7 @@ function getResultList(arr){
         ids:arr?arr.join(','):''
     }
     let url = '/product/spus/';
-    return child2.get(url,{params:defaults})
+    return child2.get(url,{params:defaults});
 }
 //https://shopapi.smartisan.com/v1/search/suggest?keyword=
 //https://shopapi.smartisan.com/v1/search/result?keyword=

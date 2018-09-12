@@ -3,17 +3,17 @@
   <x-header v-show="isShowHead">
     <span>夏侯商场</span>
     <x-icon type="navicon" 
-    slot="overwrite-left"
-    size="35"  
-    style="fill:#fff;position:relative;top:-8px;left:-3px;" 
-    class="cell-x-icon" 
-    @click="isNavshow"
+      slot="overwrite-left"
+      size="35"  
+      style="fill:#fff;position:relative;top:-8px;left:-3px;" 
+      class="cell-x-icon"
+      @click="isNavshow"
     ></x-icon>
     <x-icon  
-    slot="right" 
-    type="ios-search-strong" 
-    size="30" 
-    v-show="r_icon === 'search'"
+      slot="right" 
+      type="ios-search-strong" 
+      size="30" 
+      v-show="r_icon === 'search'"
     @click="toSearch"></x-icon>
     <router-link 
     tag="a" 

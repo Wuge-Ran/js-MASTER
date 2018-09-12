@@ -11,6 +11,7 @@ let ShopList = () => import(/* webpackChunkName: "buy" */'@/components/shopList/
 let Sort = () => import(/* webpackChunkName: "sort" */'@/views/sort/Sort');
 let Search = () => import(/* webpackChunkName: "search" */'@/views/search/Search');
 let SearchList = () => import(/* webpackChunkName: "search" */'@/views/searchList/SearchList');
+let ShopCar = () => import(/* webpackChunkName: "car" */'@/views/car/Car');
 
 Vue.use(VueRouter);
 
@@ -51,6 +52,10 @@ let router = new VueRouter({
         path:'/searchList/:key?',
         name:'searchList',
         component:SearchList 
+    },{
+        path:'/shopCar',
+        name:'ShopCar',
+        component:ShopCar
     },{
         //重定向保护
         path:'*',
