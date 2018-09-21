@@ -1,0 +1,7 @@
+<view id='box'>
+  <image src='/img/xiahou.jpg' class='img'></image>
+  <text class='head'>hello</text>
+  <view class='btn'>
+    <text>开启小程序之路</text>
+  </view>
+</view>
