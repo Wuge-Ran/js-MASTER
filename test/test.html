@@ -8,14 +8,17 @@
 </head>
 <body>
     <script>
-        let str = "fdksajfjdlsaj798k797";
-        let re = /[a-zA-z]/g;
-        let newStr = '';
-        for(let i = 0;i < str.length;i++){
-            let arr = str.match(re);
-            newStr = arr.join('');
+        function bind(){
+            let _this = this;
+            let arg = Array.prototype.slice.apply(arguments,[1]);
+            let ofn = function(){}
+            newBind = function () {
+                return _this.apply(this instanceof ofn?this:_that,arg.concat(Array.prototype.slice.apply(arguments,[0]);))
+            }
+            newBind.prototype = new ofn();
+            ofn.prototype = _this.prototype;
+            return newBind;
         }
-        console.log(newStr)
     </script>
 </body>
 </html>
