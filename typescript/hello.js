@@ -45,6 +45,7 @@ var ade = /** @class */ (function () {
     function ade() {
     }
     ade.prototype.eat = function () {
+        console.log(12);
     };
     return ade;
 }());

@@ -50,7 +50,7 @@ interface IAni{
 }
 class ade implements IAni{
     eat(){
-
+        console.log(12)
     }
 }
 class num {
