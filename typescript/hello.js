@@ -48,3 +48,9 @@ var ade = /** @class */ (function () {
     };
     return ade;
 }());
+var num = /** @class */ (function () {
+    function num() {
+        this.arrNum = [1, 2, 2];
+    }
+    return num;
+}());

@@ -53,3 +53,6 @@ class ade implements IAni{
 
     }
 }
+class num {
+    arrNum?:Number[] = [1,2,2]
+}
