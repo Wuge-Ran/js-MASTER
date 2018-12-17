@@ -10,8 +10,11 @@
     <script>
         //这个是一个警示弹窗
         class LoginAlert {
-            constructor (){
-                
+            constructor (cont){
+                this.cont = cont
+            }
+            show(){
+                alert(this.cont);
             }
         }    
     </script>
